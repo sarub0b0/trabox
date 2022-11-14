@@ -1,0 +1,26 @@
+version: "3"
+services:
+  trabox:
+    container_name: trabox
+    build: ./
+    command: sleep 99999999999999
+    volumes:
+      - ./:/app
+    environment:
+      PUBSUB_TOPIC_ID: trabox
+      PUBSUB_SUBSCRIPTION_ID: trabox-sub
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+      GOOGLE_CLOUD_PROJECT: trabox
+      MYSQL_HOST: mysql
+    links:
+      - mysql:mysql
+      - pubsub:pubsub
+    tty: true
+    stdin_open: true
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  pubsub:
+    image: google/cloud-sdk
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
