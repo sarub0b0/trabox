@@ -9,7 +9,9 @@ Gem::Specification.new do |spec|
   spec.description = 'Transactional-Outbox for Rails'
   spec.license     = 'MIT'
 
+  spec.bindir = 'exe'
   spec.files = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  spec.executables = Dir['exe/**'].map { |f| File.basename(f) }
 
   spec.add_dependency 'rails', '~> 6.1.7'
 end
