@@ -1,6 +1,6 @@
-# TransactionalOutbox
+# TraBox
 
-Short description and motivation.
+Transactional-Outbox for Rails.
 
 ## Usage
 
