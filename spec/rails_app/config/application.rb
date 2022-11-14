@@ -36,5 +36,8 @@ module Dummy
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.logger = Logger.new($stdout)
+    config.log_level = ENV['LOG_LEVEL']&.downcase&.to_sym || :error
   end
 end
