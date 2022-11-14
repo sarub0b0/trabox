@@ -1,0 +1,6 @@
+spec/rails_app/db
+spec/rails_app/log
+spec/rails_app/spec
+spec/rails_app/lib
+tmp
+Gemfile.lock
