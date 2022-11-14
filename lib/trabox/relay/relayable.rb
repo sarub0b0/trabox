@@ -1,3 +1,4 @@
+# 未publishなレコードやpublish完了時のレコード操作を追加するためのモジュール
 module Trabox
   module Relay
     module Relayable

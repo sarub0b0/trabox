@@ -1,6 +1,6 @@
+# Relayableモジュールをincludeしているモデル一覧を取得するモジュール
 module Trabox
   module Relay
-    # publish対象の複数モデルからデータを集約するモジュール
     module RelayableModels
       # @return [Array<Class>]
       def self.list
