@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/model'
+require 'support/model_setup'
 
 RSpec.describe Trabox::Relay::Relayable do
   FactoryBot.define do
@@ -74,7 +74,7 @@ RSpec.describe Trabox::Relay::Relayable do
         let(:message_id) { '1' }
         it 'message_idとpublished_atを更新する' do
           expect { subject }.to(
-            change(relayed_model, :message_id).and(change(relayed_model, :published_at))
+            change(relayed_model, :message_id).and(change(relayed_model, :published_at)),
           )
         end
       end

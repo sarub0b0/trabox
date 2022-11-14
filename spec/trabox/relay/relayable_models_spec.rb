@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/model'
+require 'support/model_setup'
 
 RSpec.describe Trabox::Relay::RelayableModels do
   class Model0 < ApplicationRecord
