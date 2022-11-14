@@ -5,7 +5,8 @@ module Trabox
   module Relay
     class Publisher
       # @param topic_id [String]
-      def initialize(topic_id)
+      # @param ordering_key [Boolean]
+      def initialize(topic_id: nil, enable_message_ordering: false)
         raise ArgumentError, 'topic_id must be specified.' if topic_id.blank?
 
         @pubsub = Google::Cloud::PubSub.new
@@ -14,15 +15,14 @@ module Trabox
 
         raise "Topic '#{topic_id}' does not exist." if @topic.nil?
 
-        @topic.enable_message_ordering!
+        @topic.enable_message_ordering! if enable_message_ordering
       end
 
       # @param message [String] JSONエンコードされた文字列
       # @param ordering_key [String]
       # @return message_id [String]
-      def publish(message:, ordering_key:)
+      def publish(message: nil, ordering_key: nil)
         raise ArgumentError if message.blank?
-        raise ArgumentError if ordering_key.blank?
 
         published_message = @topic.publish message, ordering_key: ordering_key
 

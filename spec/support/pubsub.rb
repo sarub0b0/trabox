@@ -1,4 +1,4 @@
-class PubSubCleaner
+class PubSub
   attr_accessor :topic, :subscription
   attr_reader :pubsub
 
@@ -16,7 +16,6 @@ class PubSubCleaner
     clear
 
     @topic = @pubsub.create_topic @topic_id
-    @topic.enable_message_ordering!
     @subscription = @topic.subscribe @subscription_id, message_ordering: true
   end
 
