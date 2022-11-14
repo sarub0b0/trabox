@@ -1,4 +1,4 @@
-# TraBox
+# Trabox
 
 Transactional-Outbox for Rails.
 
