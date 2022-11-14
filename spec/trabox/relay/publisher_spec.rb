@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/pubsub'
 
-describe Trabox::Relay::Publisher do
+RSpec.describe Trabox::Relay::Publisher do
   pubsub_topic_id = ENV['PUBSUB_EMULATOR_TOPIC_ID'] || ENV['PUBSUB_TOPIC_ID']
   pubsub_subscription_id = ENV['PUBSUB_EMULATOR_SUBSCRIPTION_ID'] || ENV['PUBSUB_SUBSCRIPTION_ID']
 
@@ -113,7 +113,7 @@ describe Trabox::Relay::Publisher do
       it 'publishした順番通りにsubscribeできる' do
         subject
 
-        received_message_ids = @pubsub.subscription.pull(immediate: false).map(&:message_id)
+        received_message_ids = @pubsub.subscription.pull(immediate: false).map(&:message_id).map(&:to_i)
 
         sorted_received_message_ids = received_message_ids.sort
 

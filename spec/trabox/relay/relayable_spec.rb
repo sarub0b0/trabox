@@ -2,30 +2,10 @@ require 'rails_helper'
 require 'support/model_setup'
 
 RSpec.describe Trabox::Relay::Relayable do
-  FactoryBot.define do
-    factory :relayed_model do
-      published_at { nil }
-      message_id { nil }
-    end
-  end
-
-  class RelayedModel < ApplicationRecord
-    include Trabox::Relay::Relayable
-  end
-
-  append_after(:all) do
-    Object.instance_eval { remove_const(:RelayedModel) }
-  end
-
-  describe RelayedModel do
-    create_spec_table described_class.table_name do |t|
-      t.string :message_id
-      t.datetime :published_at
-    end
-
+  describe RelayableTest do
     describe '#unpublished' do
       context 'published_atがnullのレコードがあるとき' do
-        before { @expected = create_list(:relayed_model, 10) }
+        before { @expected = create_list(:relayable_test, 10) }
 
         subject { described_class.unpublished limit: limit }
 
@@ -56,9 +36,9 @@ RSpec.describe Trabox::Relay::Relayable do
     end
 
     describe '#published_done!' do
-      let(:relayed_model) { create(:relayed_model) }
+      let(:relayable_test) { create(:relayable_test) }
 
-      subject { relayed_model.published_done! message_id }
+      subject { relayable_test.published_done! message_id }
 
       context 'message_idがnilのとき' do
         let(:message_id) { nil }
@@ -74,7 +54,7 @@ RSpec.describe Trabox::Relay::Relayable do
         let(:message_id) { '1' }
         it 'message_idとpublished_atを更新する' do
           expect { subject }.to(
-            change(relayed_model, :message_id).and(change(relayed_model, :published_at)),
+            change(relayable_test, :message_id).and(change(relayable_test, :published_at)),
           )
         end
       end
