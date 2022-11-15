@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
 
-APP_PATH = File.expand_path('../config/application', __dir__)
-require_relative '../config/boot'
-require 'rails/command'
+rails_root = ENV['RAILS_ROOT'] || '../'
 
-puts __FILE__
+APP_PATH = File.expand_path("#{rails_root}/config/application", __dir__)
+require_relative "#{rails_root}/config/boot"
 
-Rails::Command.invoke 'runner', ['puts Rails.env']
+require 'trabox/command'
+
+command = ARGV.shift
+
+Trabox::Command.invoke command, ARGV
+
 # :ft=vim:
