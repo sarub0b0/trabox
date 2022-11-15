@@ -90,6 +90,7 @@ class Options
   def optparse
     options = DEFAULT_OPTIONS.clone(freeze: false)
     @opt = OptionParser.new do |o|
+      o.banner = "\e[1mUsage\e[0m: \e[1mtrabox relay\e[0m [OPTIONS]"
       o.on('-t TOPIC_ID', '--topic-id', :REQUIRED, 'required')
       o.on('-k KEY', '--ordering-key', :REQUIRED, 'required')
       o.on('-l NUM', '--limit', "optional (default: #{Relayer::DEFAULT_LIMIT})", Integer)
