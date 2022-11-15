@@ -14,7 +14,7 @@ module Trabox
         @lock = lock
       end
 
-      def relay
+      def perform
         RelayableModels.list.each do |model|
           model.transaction do
             unpublished_events = model.lock(@lock).unpublished limit: @limit

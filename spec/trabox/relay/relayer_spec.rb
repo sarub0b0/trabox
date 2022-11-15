@@ -26,11 +26,11 @@ RSpec.describe Trabox::Relay::Relayer do
     end
   end
 
-  describe '#relay' do
+  describe '#perform' do
     subject do
       publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
       relay = described_class.new publisher
-      relay.relay
+      relay.perform
     end
 
     context 'イベントレコードがあるとき' do
@@ -117,7 +117,7 @@ RSpec.describe Trabox::Relay::Relayer do
       subject do
         publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
         relay = described_class.new publisher, limit: 10
-        relay.relay
+        relay.perform
       end
 
       context 'Publisher#publishがエラーのとき' do
@@ -206,7 +206,7 @@ RSpec.describe Trabox::Relay::Relayer do
             ActiveRecord::Base.connection_pool.with_connection do
               publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
               relay = described_class.new publisher, limit: limit, lock: lock
-              relay.relay
+              relay.perform
             end
           end
         end
