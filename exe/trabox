@@ -11,4 +11,4 @@ command = ARGV.shift
 
 Trabox::Command.invoke command, ARGV
 
-# :ft=vim:
+# vim:ft=ruby:

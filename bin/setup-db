@@ -6,4 +6,4 @@
         bin/rails db:create && bin/rails db:migrate
 )
 
-# :ft=vim:
+# vim:ft=bash:
