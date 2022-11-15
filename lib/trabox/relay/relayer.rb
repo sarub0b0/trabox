@@ -1,11 +1,11 @@
 module Trabox
   module Relay
     class Relayer
-      # @param publisher [Publisher]
+      # @param publisher [Trabox::PubSub::Publisher]
       # @param limit [Integer] SELECT文のLIMIT
       # @param ordering_key [String]
       def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, ordering_key: nil)
-        raise TypeError unless publisher.instance_of?(Publisher)
+        raise TypeError unless publisher.instance_of?(Trabox::PubSub::Publisher)
 
         @publisher = publisher
         @limit = limit

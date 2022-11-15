@@ -17,7 +17,7 @@ RSpec.describe Trabox::Relay::Relayer do
 
       context 'topicが設定されているとき' do
         let(:publisher) do
-          publisher = double(Trabox::Relay::Publisher)
+          publisher = double(Trabox::PubSub::Publisher)
           allow(publisher).to receive(:instance_of?).and_return(true)
           publisher
         end
@@ -28,7 +28,7 @@ RSpec.describe Trabox::Relay::Relayer do
 
   describe '#relay' do
     subject do
-      publisher = Trabox::Relay::Publisher.new topic_id: pubsub_topic_id
+      publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
       relay = described_class.new publisher
       relay.relay
     end
@@ -82,12 +82,12 @@ RSpec.describe Trabox::Relay::Relayer do
       end
 
       it 'publishしない' do
-        allow_any_instance_of(Trabox::Relay::Publisher).to receive(:instance_of?).and_return(true)
-        allow_any_instance_of(Trabox::Relay::Publisher).to receive(:publish)
+        allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
+        allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:publish)
 
         subject
 
-        expect_any_instance_of(Trabox::Relay::Publisher).not_to receive(:publish)
+        expect_any_instance_of(Trabox::PubSub::Publisher).not_to receive(:publish)
       end
 
       it 'message_idとpublished_atを更新しない' do
@@ -115,24 +115,24 @@ RSpec.describe Trabox::Relay::Relayer do
       end
 
       subject do
-        publisher = Trabox::Relay::Publisher.new topic_id: pubsub_topic_id
+        publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
         relay = described_class.new publisher, limit: 10
         relay.relay
       end
 
       context 'Publisher#publishがエラーのとき' do
         it 'エラーを返す' do
-          allow_any_instance_of(Trabox::Relay::Publisher).to receive(:instance_of?).and_return(true)
-          allow_any_instance_of(Trabox::Relay::Publisher).to receive(:publish).and_raise('error')
+          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
+          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:publish).and_raise('error')
 
           expect { subject }.to raise_error('error')
         end
 
         it 'ロールバックする' do
-          allow_any_instance_of(Trabox::Relay::Publisher).to receive(:instance_of?).and_return(true)
+          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
 
           publish_count = 0
-          allow_any_instance_of(Trabox::Relay::Publisher).to(
+          allow_any_instance_of(Trabox::PubSub::Publisher).to(
             receive(:publish).and_wrap_original do |m, *args|
               raise 'error' if publish_count >= 3
 
@@ -204,7 +204,7 @@ RSpec.describe Trabox::Relay::Relayer do
         threads = Array.new(thread_amount) do
           Thread.new do
             ActiveRecord::Base.connection_pool.with_connection do
-              publisher = Trabox::Relay::Publisher.new topic_id: pubsub_topic_id
+              publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
               relay = described_class.new publisher, limit: limit
               relay.relay
             end

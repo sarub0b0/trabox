@@ -1,10 +1,8 @@
 require 'trabox/version'
 require 'trabox/railtie'
 
-require 'trabox/relay/relayable'
-require 'trabox/relay/relayable_models'
-require 'trabox/relay/publisher'
-require 'trabox/relay/relayer'
+require 'trabox/relay'
+require 'trabox/pubsub'
 require 'trabox/command'
 
 module Trabox

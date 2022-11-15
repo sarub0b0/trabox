@@ -2,7 +2,7 @@ require 'google/cloud/pubsub'
 
 # Google::Cloud::PubSub::Topicのラッパー
 module Trabox
-  module Relay
+  module PubSub
     class Publisher
       # @param topic_id [String]
       # @param ordering_key [Boolean]

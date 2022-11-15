@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/pubsub'
 
-RSpec.describe Trabox::Relay::Publisher do
+RSpec.describe Trabox::PubSub::Publisher do
   pubsub_topic_id = ENV['PUBSUB_EMULATOR_TOPIC_ID'] || ENV['PUBSUB_TOPIC_ID']
   pubsub_subscription_id = ENV['PUBSUB_EMULATOR_SUBSCRIPTION_ID'] || ENV['PUBSUB_SUBSCRIPTION_ID']
 
