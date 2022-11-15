@@ -4,18 +4,20 @@ module Trabox
       # @param publisher [Trabox::PubSub::Publisher]
       # @param limit [Integer] SELECT文のLIMIT
       # @param ordering_key [String]
-      def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, ordering_key: nil)
+      # @param lock [Boolean]
+      def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, ordering_key: nil, lock: true)
         raise TypeError unless publisher.instance_of?(Trabox::PubSub::Publisher)
 
         @publisher = publisher
         @limit = limit
         @ordering_key = ordering_key
+        @lock = lock
       end
 
       def relay
         RelayableModels.list.each do |model|
           model.transaction do
-            unpublished_events = model.lock.unpublished limit: @limit
+            unpublished_events = model.lock(@lock).unpublished limit: @limit
 
             unpublished_events.each do |event|
               publish_and_commit(event)

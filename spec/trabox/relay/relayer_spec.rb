@@ -100,7 +100,7 @@ RSpec.describe Trabox::Relay::Relayer do
       end
     end
 
-    context 'エラーのとき' do
+    describe 'Errors' do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
@@ -185,7 +185,7 @@ RSpec.describe Trabox::Relay::Relayer do
       end
     end
 
-    context '複数プロセスのとき', use_truncation: true do
+    describe '複数プロセスで実行', use_truncation: true do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
@@ -205,7 +205,7 @@ RSpec.describe Trabox::Relay::Relayer do
           Thread.new do
             ActiveRecord::Base.connection_pool.with_connection do
               publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
-              relay = described_class.new publisher, limit: limit
+              relay = described_class.new publisher, limit: limit, lock: lock
               relay.relay
             end
           end
@@ -214,12 +214,28 @@ RSpec.describe Trabox::Relay::Relayer do
         threads.each(&:join)
       end
 
-      it '重複なしのメッセージをpublishする' do
-        messages = @pubsub.subscription.pull(immediate: false)
+      context 'lockが有効のとき' do
+        let(:lock) { true }
 
-        decoded = messages.map { |m| m.data.to_i }
+        it '重複なしのメッセージをpublishする' do
+          messages = @pubsub.subscription.pull(immediate: false)
 
-        expect(decoded.uniq.length).to eq(event_amount)
+          decoded = messages.map { |m| m.data.to_i }
+
+          expect(decoded.uniq.length).to eq(event_amount)
+        end
+      end
+
+      context 'lockが無効のとき' do
+        let(:lock) { false }
+
+        it '重複したメッセージをpublishする' do
+          messages = @pubsub.subscription.pull(immediate: false)
+
+          decoded = messages.map { |m| m.data.to_i }
+
+          expect(decoded.uniq.length).not_to eq(event_amount)
+        end
       end
     end
   end
