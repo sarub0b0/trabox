@@ -1,14 +1,37 @@
 #!/usr/bin/env ruby
 
+$stdout.sync = true
+$stderr.sync = true
+
 rails_root = ENV['RAILS_ROOT'] || '../'
 
-APP_PATH = File.expand_path("#{rails_root}/config/application", __dir__)
+APP_PATH ||= File.expand_path("#{rails_root}/config/application", __dir__)
 require_relative "#{rails_root}/config/boot"
 
-require 'trabox/command'
+require APP_PATH
+Rails.application.require_environment!
+Rails.application.load_runner
 
-command = ARGV.shift
+log_level = Rails.logger.level
 
-Trabox::Command.invoke command, ARGV
+trap('USR1') do
+  Rails.logger.level = :debug
+end
+
+trap('USR2') do
+  Rails.logger.level = log_level
+end
+
+optparse = Trabox::Command::OptParse.new
+begin
+  command = optparse.parse!
+
+  Trabox::Command.invoke command
+rescue StandardError => e
+  warn e.message
+  warn ""
+  warn optparse.usage
+  exit 1
+end
 
 # vim:ft=ruby:

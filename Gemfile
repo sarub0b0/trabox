@@ -20,3 +20,5 @@ gem 'pry-byebug', '~> 3.10'
 gem 'rspec-rails', '~> 6.0'
 gem 'rubocop', '~> 1.38'
 gem 'ruby-lsp', '~> 0.3.6'
+
+gem "optparse", "~> 0.2.0"
