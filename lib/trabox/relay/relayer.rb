@@ -30,7 +30,7 @@ module Trabox
 
       def publish_and_commit(event)
         message_id = @publisher.publish(
-          message: event.event_data,
+          event.event_data,
           ordering_key: @ordering_key,
         )
 

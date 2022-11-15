@@ -28,7 +28,7 @@ RSpec.describe Trabox::Relay::Relayer do
 
   describe '#relay' do
     subject do
-      publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
+      publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
       relay = described_class.new publisher
       relay.relay
     end
@@ -115,7 +115,7 @@ RSpec.describe Trabox::Relay::Relayer do
       end
 
       subject do
-        publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
+        publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
         relay = described_class.new publisher, limit: 10
         relay.relay
       end
@@ -204,7 +204,7 @@ RSpec.describe Trabox::Relay::Relayer do
         threads = Array.new(thread_amount) do
           Thread.new do
             ActiveRecord::Base.connection_pool.with_connection do
-              publisher = Trabox::PubSub::Publisher.new topic_id: pubsub_topic_id
+              publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
               relay = described_class.new publisher, limit: limit
               relay.relay
             end

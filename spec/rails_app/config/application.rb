@@ -37,7 +37,7 @@ module Dummy
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.logger = Logger.new($stdout)
+    config.logger = Logger.new($stdout) unless ENV['CI']
     config.log_level = ENV['LOG_LEVEL']&.downcase&.to_sym || :error
   end
 end
