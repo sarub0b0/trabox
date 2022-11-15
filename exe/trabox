@@ -1,23 +1,25 @@
 #!/usr/bin/env ruby
 
-require 'trabox/runner'
+require 'trabox/command'
 
 $stdout.sync = true
 $stderr.sync = true
 
-log_level = Rails.logger.level
-
-trap('USR1') do
-  Rails.logger.level = :debug
-end
-
-trap('USR2') do
-  Rails.logger.level = log_level
-end
-
 optparse = Trabox::Command::OptParse.new
 begin
   command = optparse.parse!
+
+  require 'trabox/runner'
+
+  log_level = Rails.logger.level
+
+  trap('USR1') do
+    Rails.logger.level = :debug
+  end
+
+  trap('USR2') do
+    Rails.logger.level = log_level
+  end
 
   Trabox::Command.invoke command
 rescue StandardError => e
