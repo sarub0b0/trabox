@@ -18,15 +18,14 @@ module Trabox
           end
         end
 
-        def parse!(argv)
+        def parse!
           option = {}
-          @option.parse!(argv, into: option)
+          @option.parse!(into: option)
           option.transform_keys { |k| k.to_s.underscore.to_sym }
         end
       end
 
       def self.perform(_opts)
-        binding.irb
         pp 'perform subscribe'
       end
     end

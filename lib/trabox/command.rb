@@ -20,9 +20,9 @@ module Trabox
       end
 
       def parse!
-        @opt.order!(ARGV)
+        @opt.order!
 
-        command = argv.shift
+        command = ARGV.shift
 
         return command unless command.nil?
 
