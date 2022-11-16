@@ -19,7 +19,7 @@ module Trabox
           begin
             relayer.perform
           rescue StandardError => e
-            Rails.logger.error e.message
+            Rails.logger.error e
           end
 
           sleep options.relayer.interval
