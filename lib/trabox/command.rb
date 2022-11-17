@@ -10,9 +10,9 @@ module Trabox
     def self.invoke(command)
       case command
       when 'relay'
-        Trabox::Commands::Relay.perform
+        Trabox::Command::Relay.perform
       when 'subscribe'
-        Trabox::Commands::Subscribe.perform
+        Trabox::Command::Subscribe.perform
       else
         raise "no such command: #{command}"
       end

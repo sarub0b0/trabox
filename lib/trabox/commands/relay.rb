@@ -1,7 +1,7 @@
 require_relative './relay/option_parser'
 
 module Trabox
-  module Commands
+  module Command
     module Relay
       def self.perform
         options = Options.new
