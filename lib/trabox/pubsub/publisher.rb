@@ -6,7 +6,7 @@ module Trabox
       # @param topic_id [String]
       # @param opts [Hash] provider options
       def initialize(topic_id, opts = {})
-        @publisher = Provier::Google::Publisher.new(
+        @publisher = Provider::Google::Publisher.new(
           topic_id,
           opts,
         )

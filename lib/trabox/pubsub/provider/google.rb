@@ -3,7 +3,7 @@ require 'google/cloud/pubsub'
 # Google::Cloud::PubSub::Topicのラッパー
 module Trabox
   module PubSub
-    module Provier
+    module Provider
       module Google
         LOG_PREFIX = '[google pubsub]'.freeze
 
@@ -52,7 +52,7 @@ module Trabox
           # @param subscription_id [String]
           # @param opts [Hash] Google::Cloud::PubSub options
           def initialize(subscription_id, _opts = {})
-            @pubsub = Google::Cloud::Pubsub.new
+            @pubsub = ::Google::Cloud::PubSub.new
             @subscription = @pubsub.subscription subscription_id
             @on_error = []
 
