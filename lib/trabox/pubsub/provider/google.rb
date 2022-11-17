@@ -59,8 +59,8 @@ module Trabox
             Rails.logger.info "Subscription '#{subscription_id}': message ordering is #{@subscription.message_ordering?}."
           end
 
-          def listen(_opts = {}, &callback)
-            subscriber = @subscription.listen do |received_message|
+          def listen(opts = {}, &callback)
+            subscriber = @subscription.listen(**opts) do |received_message|
               callback.call(received_message)
 
               received_message.acknowledge!
