@@ -36,7 +36,7 @@ module Trabox
           def publish(message, opts = {})
             raise ArgumentError, 'published message must not be blank' if message.blank?
 
-            published_message = @topic.publish message, opts
+            published_message = @topic.publish message, **opts
 
             Rails.logger.debug "#{LOG_PREFIX} message published. " \
               "message_id=#{published_message.message_id} options=#{opts}"
