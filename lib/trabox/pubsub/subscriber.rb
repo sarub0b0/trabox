@@ -1,6 +1,5 @@
 require 'trabox/pubsub/provider/google'
 
-# Google::Cloud::PubSub::Topicのラッパー
 module Trabox
   module PubSub
     class Subscriber
