@@ -23,9 +23,9 @@ begin
 
   Trabox::Command.invoke command
 rescue StandardError => e
-  warn e.message
+  warn e.backtrace
   warn ""
-  warn optparse.usage
+  warn command_parser.usage
   exit 1
 end
 
