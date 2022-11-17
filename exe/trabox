@@ -5,9 +5,9 @@ require 'trabox/command'
 $stdout.sync = true
 $stderr.sync = true
 
-optparse = Trabox::Command::OptParse.new
+command_parser = Trabox::Command::Parser.new
 begin
-  command = optparse.parse!
+  command = command_parser.parse!
 
   require 'trabox/runner'
 
