@@ -10,9 +10,9 @@ module Trabox
 
         relayer = Trabox::Relay::Relayer.new(
           publisher,
-          limit: options.relayer.limit,
-          ordering_key: options.relayer.ordering_key,
-          lock: options.relayer.lock,
+          limit: config.limit,
+          ordering_key: config.ordering_key,
+          lock: config.lock,
         )
 
         loop do

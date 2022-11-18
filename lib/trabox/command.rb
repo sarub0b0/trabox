@@ -2,6 +2,7 @@ require 'rails/command'
 
 require 'trabox/command/parser'
 
+require 'trabox/commands/config'
 require 'trabox/commands/relay'
 require 'trabox/commands/subscribe'
 
