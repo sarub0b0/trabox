@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'support/pubsub'
 
-RSpec.describe Trabox::PubSub::Provier::Google::Publisher do
+RSpec.describe Trabox::PubSub::Provider::Google::Publisher do
   pubsub_topic_id = ENV['PUBSUB_EMULATOR_TOPIC_ID'] || ENV['PUBSUB_TOPIC_ID']
   pubsub_subscription_id = ENV['PUBSUB_EMULATOR_SUBSCRIPTION_ID'] || ENV['PUBSUB_SUBSCRIPTION_ID']
 
@@ -56,7 +56,7 @@ RSpec.describe Trabox::PubSub::Provier::Google::Publisher do
       before do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -86,7 +86,7 @@ RSpec.describe Trabox::PubSub::Provier::Google::Publisher do
       before do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -109,5 +109,5 @@ RSpec.describe Trabox::PubSub::Provier::Google::Publisher do
   end
 end
 
-RSpec.describe Trabox::PubSub::Provier::Google::Subscriber do
+RSpec.describe Trabox::PubSub::Provider::Google::Subscriber do
 end
