@@ -1,12 +1,15 @@
+require_relative './subscribe/argument_parser'
+require_relative './subscribe/configuration'
+
 module Trabox
   module Command
     module Subscribe
       def self.perform
-        subscription_id = ENV.fetch('PUBSUB_SUBSCRIPTION_ID')
+        ArgumentParser.parse!
 
-        subscriber = Trabox::PubSub::Subscriber.new subscription_id
+        raise unless config.valid?
 
-        raise "'#{subscription_id}' does not exist." if subscriber.nil?
+        subscriber = Trabox::PubSub::Subscriber.new config.subscription_id
 
         subscriber.listen(&config.listen_callback)
       end

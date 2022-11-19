@@ -4,7 +4,7 @@ module Trabox
   module Command
     class Parser
       def initialize
-        @opt = OptionParser.new(nil, 20) do |o|
+        @parser = OptionParser.new(nil, 20) do |o|
           o.version = VERSION
           o.banner = "\e[1mUsage: #{o.program_name}\e[0m <COMMAND> [OPTIONS]"
           o.on_tail('-h', '--help', 'Print help information') do
@@ -17,7 +17,7 @@ module Trabox
       end
 
       def parse!
-        @opt.order!
+        @parser.order!
 
         command = ARGV.shift
 
@@ -29,7 +29,7 @@ module Trabox
 
       def usage
         <<~USAGE
-          #{@opt.help}
+          #{@parser.help}
           \e[1mCommands\e[0m:
               r, relay            Relay events
               s, subscribe        Subscribe events

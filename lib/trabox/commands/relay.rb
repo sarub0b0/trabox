@@ -1,18 +1,24 @@
-require_relative './relay/option_parser'
+require_relative './relay/argument_parser'
+require_relative './relay/configuration'
 
 module Trabox
   module Command
     module Relay
       def self.perform
-        options = Options.new
+        ArgumentParser.parse!
 
-        publisher = Trabox::PubSub::Publisher.new options.publisher.topic_id
+        raise unless config.valid?
+
+        publisher = Trabox::PubSub::Publisher.new(
+          publisher_config.topic_id,
+          message_ordering: publisher_config.message_ordering
+        )
 
         relayer = Trabox::Relay::Relayer.new(
           publisher,
-          limit: config.limit,
-          ordering_key: config.ordering_key,
-          lock: config.lock,
+          limit: relayer_config.limit,
+          ordering_key: relayer_config.ordering_key,
+          lock: relayer_config.lock
         )
 
         loop do
@@ -22,7 +28,7 @@ module Trabox
             Rails.logger.error e
           end
 
-          sleep options.relayer.interval
+          sleep relayer_config.interval
         end
       end
     end

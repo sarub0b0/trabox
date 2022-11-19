@@ -1,13 +1,10 @@
-require 'rails/command'
-
 require 'trabox/command/parser'
-
-require 'trabox/commands/config'
 require 'trabox/commands/relay'
 require 'trabox/commands/subscribe'
 
 module Trabox
   module Command
+    # @param command [String]
     def self.invoke(command)
       require_relative './runner'
       require_relative './logger'
