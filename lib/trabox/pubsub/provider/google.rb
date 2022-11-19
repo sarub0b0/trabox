@@ -10,7 +10,7 @@ module Trabox
         class Publisher
           # @param topic_id [String]
           # @param opts [Hash] Google::Cloud::PubSub options
-          # @option opts [Boolean] :enable_message_ordering enable_message_ordering
+          # @option opts [Boolean] :message_ordering enable_message_ordering
           def initialize(topic_id, opts = {})
             raise ArgumentError, "topic_id must be specified." if topic_id.blank?
 
@@ -22,7 +22,7 @@ module Trabox
 
             raise "'#{topic_id}' does not exist." if @topic.nil?
 
-            @topic.enable_message_ordering! if opts[:enable_message_ordering]
+            @topic.enable_message_ordering! if opts[:message_ordering]
           rescue StandardError => e
             Rails.logger.error "#{LOG_PREFIX} #{e.message}"
             raise

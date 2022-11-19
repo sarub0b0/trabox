@@ -94,7 +94,7 @@ RSpec.describe Trabox::PubSub::Provider::Google::Publisher do
 
       subject { 10.times.each { |idx| publisher.publish idx.to_s, ordering_key: 'trabox' } }
 
-      let(:publisher) { described_class.new pubsub_topic_id, enable_message_ordering: true }
+      let(:publisher) { described_class.new pubsub_topic_id, message_ordering: true }
 
       it 'publishした順番通りにsubscribeできる' do
         subject
