@@ -9,6 +9,7 @@ require 'trabox/commands/subscribe'
 module Trabox
   module Command
     def self.invoke(command)
+      require_relative './runner'
       require_relative './logger'
 
       case command

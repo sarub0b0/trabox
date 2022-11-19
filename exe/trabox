@@ -9,7 +9,6 @@ command_parser = Trabox::Command::Parser.new
 begin
   command = command_parser.parse!
 
-  require 'trabox/runner'
   Trabox::Command.invoke command
 rescue StandardError => e
   warn e.backtrace
