@@ -4,7 +4,7 @@ module Trabox
       # @param publisher [Trabox::PubSub::Publisher]
       # @param limit [Integer] SELECT文のLIMIT
       # @param ordering_key [OrderingKey]
-      # @param lock [Boolean]
+      # @param lock [Boolean, String] ActiveRecord lock argument
       def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, ordering_key: nil, lock: true)
         raise TypeError unless publisher.instance_of?(Trabox::PubSub::Publisher)
 
@@ -34,7 +34,7 @@ module Trabox
       def publish_and_commit(event, ordering_key)
         message_id = @publisher.publish(
           event.event_data,
-          ordering_key: ordering_key,
+          ordering_key: ordering_key
         )
 
         event.published_done!(message_id)
