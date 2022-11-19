@@ -31,8 +31,8 @@ module Trabox
         <<~USAGE
           #{@opt.help}
           \e[1mCommands\e[0m:
-              relay            Relay events
-              subscribe        Subscribe events
+              r, relay            Relay events
+              s, subscribe        Subscribe events
         USAGE
       end
     end
