@@ -5,14 +5,15 @@ require 'trabox/command'
 $stdout.sync = true
 $stderr.sync = true
 
-command_parser = Trabox::Command::Parser.new
 begin
+  command_parser = Trabox::Command::Parser.new
   command = command_parser.parse!
 
   Trabox::Command.invoke command
 rescue StandardError => e
   warn e.backtrace
-  warn ""
+  warn e.message
+  warn ''
   warn command_parser.usage
   exit 1
 end
