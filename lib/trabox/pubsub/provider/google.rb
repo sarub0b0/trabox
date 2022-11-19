@@ -54,6 +54,9 @@ module Trabox
           def initialize(subscription_id, _opts = {})
             @pubsub = ::Google::Cloud::PubSub.new
             @subscription = @pubsub.subscription subscription_id
+
+            raise "Subscription-ID='#{subscription_id}' does not exist." if @subscription.nil?
+
             @on_error = []
 
             Rails.logger.info "Subscription '#{subscription_id}': message ordering is #{@subscription.message_ordering?}."
