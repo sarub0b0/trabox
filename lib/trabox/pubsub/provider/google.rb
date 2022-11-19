@@ -12,7 +12,7 @@ module Trabox
           # @param opts [Hash] Google::Cloud::PubSub options
           # @option opts [Boolean] :message_ordering enable_message_ordering
           def initialize(topic_id, opts = {})
-            raise ArgumentError, "topic_id must be specified." if topic_id.blank?
+            raise ArgumentError, 'topic_id must be specified.' if topic_id.blank?
 
             # @type [Google::Cloud::PubSub::Project]
             @pubsub = ::Google::Cloud::PubSub.new
@@ -20,7 +20,7 @@ module Trabox
             # @type [Google::Cloud::PubSub::Topic]
             @topic = @pubsub.topic topic_id
 
-            raise "'#{topic_id}' does not exist." if @topic.nil?
+            raise "Topic-ID='#{topic_id}' does not exist." if @topic.nil?
 
             @topic.enable_message_ordering! if opts[:message_ordering]
           rescue StandardError => e
