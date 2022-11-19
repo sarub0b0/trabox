@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Trabox::Relay::OrderingKey do
-  describe ".initialize" do
+  describe '.initialize' do
     subject { described_class.new key }
 
     context 'Procを設定したとき' do
@@ -11,7 +11,7 @@ RSpec.describe Trabox::Relay::OrderingKey do
     end
 
     context 'Stringを設定したとき' do
-      let(:key) { "test" }
+      let(:key) { 'test' }
 
       it { expect { subject }.not_to raise_error }
     end
@@ -31,14 +31,18 @@ RSpec.describe Trabox::Relay::OrderingKey do
       let(:key) { ->(a, b) { "proc-#{a}-#{b}" } }
 
       it '文字列を返す' do
-        expect(subject.call("A", "B")).to eq("proc-A-B")
+        expect(subject.call('A', 'B')).to eq('proc-A-B')
       end
     end
 
     context 'Stringを設定したとき' do
-      let(:key) { "test" }
+      let(:key) { 'test' }
       it '文字列を返す' do
-        expect(subject.call).to eq("test")
+        expect(subject.call).to eq('test')
+      end
+
+      it '引数を与えてもエラーにならない' do
+        expect(subject.call(1, 2, 3)).to eq('test')
       end
     end
 
