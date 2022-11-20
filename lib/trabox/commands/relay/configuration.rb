@@ -14,12 +14,12 @@ module Trabox
 
         # @return [Option::Relayer]
         def relayer_config
-          @config.relayer
+          config.relayer
         end
 
         # @return [Option::Publisher]
         def publisher_config
-          @config.publisher
+          config.publisher
         end
       end
 
