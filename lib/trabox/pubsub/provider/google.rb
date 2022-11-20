@@ -57,28 +57,23 @@ module Trabox
 
             raise "Subscription-ID='#{subscription_id}' does not exist." if @subscription.nil?
 
-            @on_error = []
-
             Rails.logger.info "Subscription '#{subscription_id}': message ordering is #{@subscription.message_ordering?}."
           end
 
-          def listen(opts = {}, &callback)
+          def listen(opts = {}, error_callbacks: [], &callback)
             subscriber = @subscription.listen(**opts) do |received_message|
               callback.call(received_message)
 
               received_message.acknowledge!
             end
 
-            @on_error.each do |&cb|
+            binding.pry
+            error_callbacks.each do |cb|
               subscriber.on_error(&cb)
             end
 
             Rails.logger.info 'Listening subscrition...'
             subscriber.start.wait!
-          end
-
-          def on_error(&callback)
-            @on_error << callback
           end
         end
       end
