@@ -1,3 +1,5 @@
+require_relative './option'
+
 module Trabox
   module Command
     module Subscribe
@@ -9,27 +11,23 @@ module Trabox
         def config
           @config ||= Configuration.new
         end
+
+        def subscriber_config
+          config.subscriber
+        end
       end
 
       class Configuration
-        # @!attribute [rw] subscription_id
-        #   @return [String]
-        # @!attribute [rw] on_listen
-        #   @return [Proc]
-        attr_accessor :subscription_id, :listen_callback
+        # @!attribute [rw] subscriber
+        #   @return [Option::Relayer]
+        attr_accessor :subscriber
 
         def initialize
-          @subscription_id = ENV['TRABOX_SUBSCRIBER_SUBSCRIPTION_ID']
-          @listen_callback = proc {}
+          @subscriber = Option::Subscriber.new
         end
 
         def valid?
-          if @subscription_id.nil?
-            $stdout.puts 'topic-idを設定してください。'
-            false
-          else
-            true
-          end
+          @subscriber.valid?
         end
       end
     end
