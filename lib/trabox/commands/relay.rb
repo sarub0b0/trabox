@@ -21,14 +21,14 @@ module Trabox
           lock: relayer_config.lock
         )
 
-        loop do
-          begin
+        begin
+          loop do
             relayer.perform
-          rescue StandardError => e
-            Rails.logger.error e
-          end
 
-          sleep relayer_config.interval
+            sleep relayer_config.interval
+          end
+        rescue StandardError => e
+          Rails.logger.error e
         end
       end
     end
