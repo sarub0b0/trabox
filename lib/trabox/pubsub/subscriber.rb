@@ -7,8 +7,8 @@ module Trabox
         @subscriber = Provider::Google::Subscriber.new subscription_id, opts
       end
 
-      def listen(opts = {}, &callback)
-        @subscriber.listen opts, &callback
+      def listen(opts = {}, error_callbacks: [], &callback)
+        @subscriber.listen opts, error_callbacks: error_callbacks, &callback
       end
     end
   end
