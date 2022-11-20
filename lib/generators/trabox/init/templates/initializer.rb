@@ -14,7 +14,6 @@ Trabox::Command::Subscribe.configure do |config|
 
   config.subscriber.listen_callback = lambda do |received_message|
     Rails.logger.debug received_message
-    raise 'hogehoge'
   end
 
   # config.subscriber.error_callbacks << ->(err) { Rails.logger.error err }
