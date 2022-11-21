@@ -29,6 +29,8 @@ module Trabox
           end
         rescue StandardError => e
           Rails.logger.error e
+
+          ActiveRecord::Base.clear_all_connections!
         end
       end
     end
