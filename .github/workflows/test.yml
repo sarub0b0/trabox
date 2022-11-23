@@ -31,7 +31,7 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
-          install_components: "pubsub-emulator"
+          install_components: "beta,pubsub-emulator"
 
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
