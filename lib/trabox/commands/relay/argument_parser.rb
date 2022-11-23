@@ -28,10 +28,6 @@ module Trabox
 
             BANNER
 
-            o.on('-t TOPIC_ID', '--topic-id', String)
-            o.on('-o', '--message-ordering', TrueClass)
-
-            o.on('-k KEY', '--ordering-key', String)
             o.on('-l NUM', '--limit', Integer)
             o.on('-i SEC', '--interval', Integer)
             o.on('-L', '--[no-]lock', TrueClass)
@@ -46,12 +42,7 @@ module Trabox
           opts.each do |attr, val|
             continue if val.nil?
 
-            case attr
-            when :topic_id, :message_ordering
-              Relay.publisher_config.send("#{attr}=", val)
-            when :ordering_key, :limit, :interval, :lock
-              Relay.relayer_config.send("#{attr}=", val)
-            end
+            Relay.config.send("#{attr}=", val)
           end
         end
       end

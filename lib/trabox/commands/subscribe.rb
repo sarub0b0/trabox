@@ -9,13 +9,9 @@ module Trabox
 
         raise unless config.valid?
 
-        subscriber = Trabox::PubSub::Subscriber.new subscriber_config.subscription_id
+        subscriber = config.subscriber
 
-        subscriber.listen(
-          {},
-          error_callbacks: subscriber_config.error_callbacks,
-          &subscriber_config.listen_callback
-        )
+        subscriber.subscribe
       end
     end
   end

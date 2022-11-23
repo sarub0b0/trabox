@@ -1,5 +1,3 @@
-require_relative './option'
-
 module Trabox
   module Command
     module Relay
@@ -11,32 +9,38 @@ module Trabox
         def config
           @config ||= Configuration.new
         end
-
-        # @return [Option::Relayer]
-        def relayer_config
-          config.relayer
-        end
-
-        # @return [Option::Publisher]
-        def publisher_config
-          config.publisher
-        end
       end
 
       class Configuration
-        # @!attribute [rw] relayer
-        #   @return [Option::Relayer]
+        DEFAULT_SELECT_LIMIT = 3
+        DEFAULT_INTERVAL = 5
+        DEFAULT_LOCK = true
+
+        # @!attribute [rw] limit
+        #   @return [Integer]
+        # @!attribute [rw] interval
+        #   @return [Integer]
+        # @!attribute [rw] lock
+        #   @return [Boolean, String]
         # @!attribute [rw] publisher
-        #   @return [Option::Publisher]
-        attr_accessor :relayer, :publisher
+        #   @return [Trabox::Publisher]
+        attr_accessor :limit,
+                      :interval,
+                      :lock,
+                      :publisher
 
         def initialize
-          @relayer = Option::Relayer.new
-          @publisher = Option::Publisher.new
+          @limit = ENV['TRABOX_RELAYER_LIMIT'] || DEFAULT_SELECT_LIMIT
+          @interval = ENV['TRABOX_RELAYER_INTERVAL'] || DEFAULT_INTERVAL
+          @lock = ENV['TRABOX_RELAYER_LOCK'] || DEFAULT_LOCK
+        end
+
+        def interval=(interval)
+          @interval = interval.to_i
         end
 
         def valid?
-          @relayer.valid? && @publisher.valid?
+          @publisher.is_a?(Trabox::Publisher)
         end
       end
     end

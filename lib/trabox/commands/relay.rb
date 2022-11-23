@@ -9,23 +9,21 @@ module Trabox
 
         raise unless config.valid?
 
-        publisher = Trabox::PubSub::Publisher.new(
-          publisher_config.topic_id,
-          message_ordering: publisher_config.message_ordering
-        )
+        publisher = config.publisher
 
         relayer = Trabox::Relay::Relayer.new(
           publisher,
-          limit: relayer_config.limit,
-          ordering_key: relayer_config.ordering_key,
-          lock: relayer_config.lock
+          limit: config.limit,
+          lock: config.lock
         )
+
+        interval = config.interval
 
         begin
           loop do
             relayer.perform
 
-            sleep relayer_config.interval
+            sleep interval
           end
         rescue StandardError => e
           Rails.logger.error e

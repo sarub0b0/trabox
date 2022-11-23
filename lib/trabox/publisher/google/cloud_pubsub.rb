@@ -11,6 +11,7 @@ module Trabox
           LOG_PREFIX = '[google pubsub]'.freeze
 
           class OrderingKey
+            # @param key [Proc(ActiveRecord), String]
             def initialize(key)
               @key = if key.is_a?(Proc)
                        key
@@ -21,6 +22,7 @@ module Trabox
                      end
             end
 
+            # @return [String]
             def call(*arg)
               key = @key.call(*arg)
 
@@ -31,9 +33,9 @@ module Trabox
           end
 
           # @param topic_id [String]
-          # @param opts [Hash] Google::Cloud::PubSub options
-          # @option opts [Boolean] :message_ordering enable_message_ordering
-          def initialize(topic_id, opts = {})
+          # @param message_ordering [Boolean] enable_message_ordering
+          # @param ordering_key [OrderingKey]
+          def initialize(topic_id, message_ordering: true, ordering_key: nil)
             raise ArgumentError, 'topic_id must be specified.' if topic_id.blank?
 
             # @type [Google::Cloud::PubSub::Project]
@@ -42,11 +44,11 @@ module Trabox
             # @type [Google::Cloud::PubSub::Topic]
             @topic = @pubsub.topic topic_id
 
-            @ordering_key = opts[:ordering_key] if opts[:ordering_key]
+            @ordering_key = ordering_key
 
             raise "Topic-ID='#{topic_id}' does not exist." if @topic.nil?
 
-            @topic.enable_message_ordering! if opts[:message_ordering]
+            @topic.enable_message_ordering! if message_ordering
           rescue StandardError => e
             Rails.logger.error "#{LOG_PREFIX} #{e.message}"
             raise

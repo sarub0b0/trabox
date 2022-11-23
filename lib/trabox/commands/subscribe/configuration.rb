@@ -1,5 +1,3 @@
-require_relative './option'
-
 module Trabox
   module Command
     module Subscribe
@@ -11,10 +9,6 @@ module Trabox
         def config
           @config ||= Configuration.new
         end
-
-        def subscriber_config
-          config.subscriber
-        end
       end
 
       class Configuration
@@ -22,12 +16,8 @@ module Trabox
         #   @return [Option::Relayer]
         attr_accessor :subscriber
 
-        def initialize
-          @subscriber = Option::Subscriber.new
-        end
-
         def valid?
-          @subscriber.valid?
+          @subscriber.is_a?(Trabox::Subscriber)
         end
       end
     end
