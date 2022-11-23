@@ -5,6 +5,11 @@ module Trabox
   module Command
     module Relay
       def self.perform
+        config_activate
+
+        require_relative './runner'
+        require_relative './logger'
+
         ArgumentParser.parse!
 
         raise unless config.valid?

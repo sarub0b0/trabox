@@ -6,9 +6,6 @@ module Trabox
   module Command
     # @param command [String]
     def self.invoke(command)
-      require_relative './runner'
-      require_relative './logger'
-
       case command
       when 'r', 'relay'
         Trabox::Command::Relay.perform

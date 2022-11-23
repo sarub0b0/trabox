@@ -2,12 +2,21 @@ module Trabox
   module Command
     module Relay
       class << self
+        attr_accessor :active
+        alias active? active
+
         def configure
+          return unless active?
+
           yield config
         end
 
         def config
           @config ||= Configuration.new
+        end
+
+        def config_activate
+          @active = true
         end
       end
 

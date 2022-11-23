@@ -4,6 +4,11 @@ module Trabox
   module Command
     module Subscribe
       def self.perform
+        config_activate
+
+        require_relative './runner'
+        require_relative './logger'
+
         raise unless config.valid?
 
         subscriber = config.subscriber
