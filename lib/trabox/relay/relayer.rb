@@ -3,7 +3,6 @@ module Trabox
     class Relayer
       # @param publisher [Trabox::PubSub::Publisher]
       # @param limit [Integer] SELECT文のLIMIT
-      # @param ordering_key [OrderingKey]
       # @param lock [Boolean, String] ActiveRecord lock argument
       def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, lock: true)
         raise TypeError unless publisher.is_a?(Trabox::Publisher)
