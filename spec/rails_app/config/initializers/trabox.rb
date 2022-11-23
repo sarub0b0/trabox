@@ -1,21 +1,29 @@
+ENV['PUBSUB_TOPIC_ID'] = 'trabox'
+ENV['PUBSUB_SUBSCRIPTION_ID'] = 'trabox-sub'
+ENV['PUBSUB_EMULATOR_HOST'] = 'localhost:8085'
+ENV['GOOGLE_CLOUD_PROJECT'] = 'trabox'
+
 Trabox::Command::Relay.configure do |config|
-  config.relayer.limit = 10
-  config.relayer.lock = true
-  config.relayer.interval = 5
+  config.limit = 10
+  config.lock = true
+  config.interval = 5
 
-  config.relayer.ordering_key = ->(klass, _model) { klass.name.underscore }
-
-  config.publisher.topic_id = 'trabox'
-  config.publisher.message_ordering = true
+  config.publisher = Trabox::Publisher::Google::Cloud::PubSub.new(
+    'trabox',
+    message_ordering: true,
+    ordering_key: ->(event) { event.model_name.name }
+  )
 end
 
 Trabox::Command::Subscribe.configure do |config|
-  config.subscriber.subscription_id = 'trabox-sub'
-
-  config.subscriber.listen_callback = lambda do |received_message|
-    Rails.logger.debug received_message
-    raise 'hogehoge'
+  listen_callback = lambda do |received_message|
+    Rails.logger.info "id=#{received_message.message_id} message=#{received_message.data} ordering_key=#{received_message.ordering_key}"
   end
 
-  # config.subscriber.error_callbacks << ->(err) { Rails.logger.error err }
+  config.subscriber = Trabox::Subscriber::Google::Cloud::PubSub.new(
+    'trabox-sub',
+    listen_options: {},
+    listen_callback: listen_callback,
+    error_callbacks: []
+  )
 end
