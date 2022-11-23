@@ -17,8 +17,8 @@ RSpec.describe Trabox::Relay::Relayer do
 
       context 'topicが設定されているとき' do
         let(:publisher) do
-          publisher = double(Trabox::PubSub::Publisher)
-          allow(publisher).to receive(:instance_of?).and_return(true)
+          publisher = double(Trabox::Publisher::Google::Cloud::PubSub)
+          allow(publisher).to receive(:is_a?).and_return(true)
           publisher
         end
         it { expect { subject }.not_to raise_error }
@@ -28,7 +28,7 @@ RSpec.describe Trabox::Relay::Relayer do
 
   describe '#perform' do
     subject do
-      publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
+      publisher = Trabox::Publisher::Google::Cloud::PubSub.new pubsub_topic_id
       relay = described_class.new publisher
       relay.perform
     end
@@ -37,7 +37,7 @@ RSpec.describe Trabox::Relay::Relayer do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -61,7 +61,7 @@ RSpec.describe Trabox::Relay::Relayer do
         expect do
           @published_event.reload
         end.to(
-          change(@published_event, :published_at).and(change(@published_event, :message_id)),
+          change(@published_event, :published_at).and(change(@published_event, :message_id))
         )
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Trabox::Relay::Relayer do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -82,12 +82,12 @@ RSpec.describe Trabox::Relay::Relayer do
       end
 
       it 'publishしない' do
-        allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
-        allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:publish)
+        allow_any_instance_of(Trabox::Publisher::Google::Cloud::PubSub).to receive(:instance_of?).and_return(true)
+        allow_any_instance_of(Trabox::Publisher::Google::Cloud::PubSub).to receive(:publish)
 
         subject
 
-        expect_any_instance_of(Trabox::PubSub::Publisher).not_to receive(:publish)
+        expect_any_instance_of(Trabox::Publisher::Google::Cloud::PubSub).not_to receive(:publish)
       end
 
       it 'message_idとpublished_atを更新しない' do
@@ -104,7 +104,7 @@ RSpec.describe Trabox::Relay::Relayer do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -115,30 +115,27 @@ RSpec.describe Trabox::Relay::Relayer do
       end
 
       subject do
-        publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
+        publisher = Trabox::Publisher::Google::Cloud::PubSub.new pubsub_topic_id
         relay = described_class.new publisher, limit: 10
         relay.perform
       end
 
       context 'Publisher#publishがエラーのとき' do
         it 'エラーを返す' do
-          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
-          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:publish).and_raise('error')
+          allow_any_instance_of(Trabox::Publisher::Google::Cloud::PubSub).to receive(:publish).and_raise('error')
 
           expect { subject }.to raise_error('error')
         end
 
         it 'ロールバックする' do
-          allow_any_instance_of(Trabox::PubSub::Publisher).to receive(:instance_of?).and_return(true)
-
           publish_count = 0
-          allow_any_instance_of(Trabox::PubSub::Publisher).to(
+          allow_any_instance_of(Trabox::Publisher::Google::Cloud::PubSub).to(
             receive(:publish).and_wrap_original do |m, *args|
               raise 'error' if publish_count >= 3
 
               publish_count += 1
               m.call(*args)
-            end,
+            end
           )
 
           expect { subject }.to raise_error('error')
@@ -153,7 +150,7 @@ RSpec.describe Trabox::Relay::Relayer do
         before(:context) do
           @pubsub = PubSub.new(
             topic_id: pubsub_topic_id,
-            subscription_id: pubsub_subscription_id,
+            subscription_id: pubsub_subscription_id
           )
 
           @pubsub.setup
@@ -173,7 +170,7 @@ RSpec.describe Trabox::Relay::Relayer do
 
               publish_count += 1
               m.call(*args)
-            end,
+            end
           )
 
           expect { subject }.to raise_error('error')
@@ -189,7 +186,7 @@ RSpec.describe Trabox::Relay::Relayer do
       before(:context) do
         @pubsub = PubSub.new(
           topic_id: pubsub_topic_id,
-          subscription_id: pubsub_subscription_id,
+          subscription_id: pubsub_subscription_id
         )
 
         @pubsub.setup
@@ -204,7 +201,9 @@ RSpec.describe Trabox::Relay::Relayer do
         threads = Array.new(thread_amount) do
           Thread.new do
             ActiveRecord::Base.connection_pool.with_connection do
-              publisher = Trabox::PubSub::Publisher.new pubsub_topic_id
+              publisher = Trabox::Publisher::Google::Cloud::PubSub.new pubsub_topic_id,
+                                                                       ordering_key: Trabox::Publisher::Google::Cloud::PubSub::OrderingKey.new('test')
+
               relay = described_class.new publisher, limit: limit, lock: lock
               relay.perform
             end

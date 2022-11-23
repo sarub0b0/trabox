@@ -29,7 +29,7 @@ module Option
     end
 
     def ordering_key=(key)
-      @ordering_key = Trabox::Relay::OrderingKey.new key
+      @ordering_key = Trabox::PubSub::OrderingKey.new key
     end
 
     def interval=(interval)
