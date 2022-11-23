@@ -19,12 +19,10 @@ module Trabox
 
         interval = config.interval
 
-        begin
-          loop do
-            relayer.perform
+        loop do
+          relayer.perform
 
-            sleep interval
-          end
+          sleep interval
         rescue StandardError => e
           Rails.logger.error e
 
