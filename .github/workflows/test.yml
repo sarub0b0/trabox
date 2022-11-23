@@ -23,7 +23,6 @@ jobs:
       PUBSUB_SUBSCRIPTION_ID: trabox-sub
       PUBSUB_EMULATOR_HOST: localhost:8085
       GOOGLE_CLOUD_PROJECT: trabox
-      MYSQL_HOST: mysql
       RAILS_ENV: test
     steps:
       - name: Checkout code
