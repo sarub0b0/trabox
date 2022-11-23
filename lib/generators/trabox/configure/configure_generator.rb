@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Trabox
-  class InitGenerator < Rails::Generators::Base
+  class ConfigureGenerator < Rails::Generators::Base
     source_root File.expand_path('templates', __dir__)
 
     def create_initializer

@@ -1,7 +1,7 @@
 require 'rails_helper'
-require 'generators/trabox/init/init_generator'
+require 'generators/trabox/configure/configure_generator'
 
-RSpec.describe Trabox::InitGenerator, type: :generator do
+RSpec.describe Trabox::ConfigureGenerator, type: :generator do
   destination File.expand_path('../../../tmp', __dir__)
 
   before do
