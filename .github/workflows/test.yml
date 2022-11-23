@@ -26,11 +26,8 @@ jobs:
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
-
-      - name: Install pubsub emulator
-        run: |
-          gcloud components install beta --quiet
-          gcloud components install cloud-pubsub-emulator --quiet
+        with:
+          install_components: "pubsub-emulator"
 
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
