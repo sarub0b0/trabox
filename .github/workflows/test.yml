@@ -1,0 +1,44 @@
+name: test
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - "3306:3306"
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      pubsub:
+        image: google/cloud-sdk
+        command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+        ports:
+          - "8085:8085"
+    env:
+      PUBSUB_TOPIC_ID: trabox
+      PUBSUB_SUBSCRIPTION_ID: trabox-sub
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+      GOOGLE_CLOUD_PROJECT: trabox
+      MYSQL_HOST: mysql
+      RAILS_ENV: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # ruby-version: XX
+          bundler-cache: true
+
+      - name: Set up database
+        run: bin/setup-db
+
+      - name: Set up pubsub emulator
+        run: bin/setup-pubsub
+
+      - name: Run tests
+        run: bin/rspec
