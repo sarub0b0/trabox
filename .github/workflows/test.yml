@@ -15,7 +15,7 @@ jobs:
         options: >-
           --health-cmd 'mysqladmin ping'
           --health-interval 10s
-          --health-timeout 5
+          --health-timeout 5s
           --health-retry 5
 
     env:
