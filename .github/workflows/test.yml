@@ -12,6 +12,11 @@ jobs:
           - "3306:3306"
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        options: >-
+          --health-cmd 'mysqladmin ping'
+          --health-interval 10s
+          --health-timeout 5
+          --health-retry 5
 
     env:
       PUBSUB_TOPIC_ID: trabox
