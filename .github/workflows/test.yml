@@ -44,6 +44,6 @@ jobs:
 
       - name: Run tests
         run: |
-          gcloud beta emulators pubsub start --quiet --host-port=localhost:8085 &
+          gcloud beta emulators pubsub start --host-port=localhost:8085 --quiet &
           curl http://localhost:8085 --silent --retry 30 --retry-delay 1 --retry-connrefused
           bin/rspec
