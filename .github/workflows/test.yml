@@ -12,21 +12,27 @@ jobs:
           - "3306:3306"
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      pubsub:
-        image: google/cloud-sdk
-        command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
-        ports:
-          - "8085:8085"
+
     env:
       PUBSUB_TOPIC_ID: trabox
       PUBSUB_SUBSCRIPTION_ID: trabox-sub
-      PUBSUB_EMULATOR_HOST: pubsub:8085
+      PUBSUB_EMULATOR_HOST: localhost:8085
       GOOGLE_CLOUD_PROJECT: trabox
       MYSQL_HOST: mysql
       RAILS_ENV: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud
+        with:
+          version: latest
+
+      - name: Install pubsub emulator
+        run: |
+          gcloud components install beta --quiet
+          gcloud components install cloud-pubsub-emulator --quiet
 
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
@@ -37,8 +43,8 @@ jobs:
       - name: Set up database
         run: bin/setup-db
 
-      - name: Set up pubsub emulator
-        run: bin/setup-pubsub
-
       - name: Run tests
-        run: bin/rspec
+        run: |
+          gcloud beta emulators pubsub start --host-port=localhost:8085 &
+          curl http://localhost:8085 --silent --retry 30 --retry-delay 1 --retry-connrefused
+          bin/rspec
