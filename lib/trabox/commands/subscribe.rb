@@ -13,7 +13,15 @@ module Trabox
 
         subscriber = config.subscriber
 
-        subscriber.subscribe
+        Metric.service_check('subscribe.service.check', Metric::SERVICE_OK)
+
+        begin
+          subscriber.subscribe
+        rescue StandardError => e
+          Rails.logger.error e
+
+          Metric.service_check('subscribe.service.check', Metric::SERVICE_CRITICAL)
+        end
       end
     end
   end
