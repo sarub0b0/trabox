@@ -3,6 +3,8 @@ ENV['PUBSUB_SUBSCRIPTION_ID'] = 'trabox-sub'
 ENV['PUBSUB_EMULATOR_HOST'] = 'localhost:8085'
 ENV['GOOGLE_CLOUD_PROJECT'] = 'trabox'
 
+Trabox::Metric.setup
+
 Trabox::Command::Relay.configure do |config|
   config.limit = 10
   config.lock = true

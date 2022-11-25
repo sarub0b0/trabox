@@ -25,13 +25,19 @@ module Trabox
         interval = config.interval
 
         loop do
-          relayer.perform
+          begin
+            relayer.perform
+
+            Metric.service_check(Metric::SERVICE_OK)
+          rescue StandardError => e
+            Rails.logger.error e
+
+            ActiveRecord::Base.clear_all_connections!
+
+            Metric.service_check(Metric::SERVICE_CRITICAL)
+          end
 
           sleep interval
-        rescue StandardError => e
-          Rails.logger.error e
-
-          ActiveRecord::Base.clear_all_connections!
         end
       end
     end

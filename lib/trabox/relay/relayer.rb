@@ -15,10 +15,22 @@ module Trabox
       def perform
         RelayableModels.list.each do |model|
           model.transaction do
-            unpublished_events = model.lock(@lock).unpublished limit: @limit
+            unpublished_events = begin
+              model.lock(@lock).unpublished limit: @limit
+            rescue StandardError
+              Metric.increment('find_events_error_count',
+                               tags: ["event-type:#{model.name.underscore}"])
+              raise
+            end
 
             unpublished_events.each do |event|
+              Metric.increment('unpublished_event_count',
+                               tags: ["event-type:#{event.class.name.underscore}", "event-id:#{event.id}"])
+
               publish_and_commit(event)
+
+              Metric.increment('published_event_count',
+                               tags: ["event-type:#{event.class.name.underscore}", "event-id:#{event.id}"])
             end
 
             Rails.logger.info "Published events. (#{model.name.underscore}=#{unpublished_events.size})"
@@ -29,9 +41,21 @@ module Trabox
       private
 
       def publish_and_commit(event)
-        message_id = @publisher.publish event
+        begin
+          message_id = @publisher.publish event
+        rescue StandardError
+          Metric.increment('published_event_error_count',
+                           tags: ["event-type:#{event.class.name.underscore}", "event-id:#{event.id}"])
+          raise
+        end
 
-        event.published_done! message_id
+        begin
+          event.published_done! message_id
+        rescue StandardError
+          Metric.increment('update_event_record_error_count',
+                           tags: ["event-type:#{event.class.name.underscore}", "event-id:#{event.id}"])
+          raise
+        end
       end
     end
   end

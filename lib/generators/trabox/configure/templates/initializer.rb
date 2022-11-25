@@ -1,3 +1,5 @@
+Trabox::Metric.setup
+
 Trabox::Command::Relay.configure do |config|
   config.limit = 10
   config.lock = true

@@ -23,8 +23,8 @@ module Trabox
             end
 
             # @return [String]
-            def call(*arg)
-              key = @key.call(*arg)
+            def call(*args)
+              key = @key.call(*args)
 
               raise 'OrderingKey#call should be returned String type.' unless key.instance_of?(String)
 

@@ -24,6 +24,12 @@ module Trabox
               @listen_callback.call(received_message)
 
               received_message.acknowledge!
+
+              Metric.service_check(Metric::SERVICE_OK)
+            end
+
+            subscriber.on_error do |_e|
+              Metric.service_check(Metric::SERVICE_CRITICAL)
             end
 
             @error_callbacks.each do |cb|
