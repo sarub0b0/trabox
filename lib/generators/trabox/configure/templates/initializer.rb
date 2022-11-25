@@ -1,4 +1,4 @@
-Trabox::Metric.setup
+Trabox::Metric.setup unless Rails.env.test?
 
 Trabox::Command::Relay.configure do |config|
   config.limit = 10
