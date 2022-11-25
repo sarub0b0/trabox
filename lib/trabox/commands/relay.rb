@@ -28,13 +28,13 @@ module Trabox
           begin
             relayer.perform
 
-            Metric.service_check(Metric::SERVICE_OK)
+            Metric.service_check('relay.service.check', Metric::SERVICE_OK)
           rescue StandardError => e
             Rails.logger.error e
 
             ActiveRecord::Base.clear_all_connections!
 
-            Metric.service_check(Metric::SERVICE_CRITICAL)
+            Metric.service_check('relay.service.check', Metric::SERVICE_CRITICAL)
           end
 
           sleep interval

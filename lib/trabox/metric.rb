@@ -24,8 +24,8 @@ module Trabox
         @statsd = Datadog::Statsd.new(*args, **kwargs)
       end
 
-      def service_check(status, opts = {})
-        name = metric_name('service.check')
+      def service_check(name, status, opts = {})
+        name = metric_name(name)
 
         @statsd&.service_check(name, status, opts)
 
