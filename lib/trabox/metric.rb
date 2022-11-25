@@ -21,7 +21,6 @@ module Trabox
 
       # Datadog::Statsd.new arguments
       def setup(*args, **kwargs)
-        binding.pry
         @statsd = Datadog::Statsd.new(*args, **kwargs)
       end
 
