@@ -1,3 +1,5 @@
+require_relative '../common/configuration'
+
 module Trabox
   module Command
     module Subscribe
@@ -20,10 +22,14 @@ module Trabox
         end
       end
 
-      class Configuration
+      class Configuration < Common::Configuration
         # @!attribute [rw] subscriber
         #   @return [Option::Relayer]
         attr_accessor :subscriber
+
+        def initialize
+          super
+        end
 
         def check
           return if @subscriber.respond_to?(:subscribe)

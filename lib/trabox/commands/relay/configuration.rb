@@ -1,3 +1,5 @@
+require_relative '../common/configuration'
+
 module Trabox
   module Command
     module Relay
@@ -20,7 +22,7 @@ module Trabox
         end
       end
 
-      class Configuration
+      class Configuration < Common::Configuration
         DEFAULT_SELECT_LIMIT = 3
         DEFAULT_INTERVAL = 5
         DEFAULT_LOCK = true
@@ -42,6 +44,8 @@ module Trabox
           @limit = ENV['TRABOX_RELAYER_LIMIT'] || DEFAULT_SELECT_LIMIT
           @interval = ENV['TRABOX_RELAYER_INTERVAL'] || DEFAULT_INTERVAL
           @lock = ENV['TRABOX_RELAYER_LOCK'] || DEFAULT_LOCK
+
+          super
         end
 
         def interval=(interval)

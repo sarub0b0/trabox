@@ -31,6 +31,7 @@ module Trabox
             o.on('-l NUM', '--limit', Integer)
             o.on('-i SEC', '--interval', Integer)
             o.on('-L', '--[no-]lock', TrueClass)
+            o.on('--log-level LEVEL', String) { |v| v.downcase.to_sym }
           end
 
           @parser.parse!(into: opts)

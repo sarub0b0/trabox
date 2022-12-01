@@ -9,6 +9,7 @@ Trabox::Command::Relay.configure do |config|
   config.limit = 10
   config.lock = true
   config.interval = 5
+  config.log_level = :info
 
   ordering_key = Trabox::Publisher::Google::Cloud::PubSub::OrderingKey.new ->(event) { event.model_name.name }
 
@@ -20,6 +21,8 @@ Trabox::Command::Relay.configure do |config|
 end
 
 Trabox::Command::Subscribe.configure do |config|
+  config.log_level = :info
+
   listen_callback = lambda do |received_message|
     Rails.logger.info "id=#{received_message.message_id} message=#{received_message.data} ordering_key=#{received_message.ordering_key}"
   end

@@ -8,11 +8,20 @@ module Trabox
         config_activate
 
         require_relative './runner'
-        require_relative './logger'
+
+        trap('USR1') do
+          Rails.logger.level = :debug
+        end
+
+        trap('USR2') do
+          Rails.logger.level = config.log_level
+        end
 
         ArgumentParser.parse!
 
         config.check
+
+        Rails.logger.level = config.log_level
 
         publisher = config.publisher
 
