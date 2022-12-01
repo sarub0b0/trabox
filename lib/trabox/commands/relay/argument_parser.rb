@@ -40,7 +40,7 @@ module Trabox
 
         def config_overwrite(opts)
           opts.each do |attr, val|
-            continue if val.nil?
+            next if val.nil?
 
             Relay.config.send("#{attr}=", val)
           end
