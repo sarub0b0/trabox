@@ -1,3 +1,4 @@
+require_relative './subscribe/argument_parser'
 require_relative './subscribe/configuration'
 
 module Trabox
