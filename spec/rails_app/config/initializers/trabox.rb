@@ -10,10 +10,12 @@ Trabox::Command::Relay.configure do |config|
   config.lock = true
   config.interval = 5
 
+  ordering_key = Trabox::Publisher::Google::Cloud::PubSub::OrderingKey.new ->(event) { event.model_name.name }
+
   config.publisher = Trabox::Publisher::Google::Cloud::PubSub.new(
     'trabox',
     message_ordering: true,
-    ordering_key: ->(event) { event.model_name.name }
+    ordering_key: ordering_key
   )
 end
 
