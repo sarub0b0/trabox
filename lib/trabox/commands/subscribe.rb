@@ -6,7 +6,7 @@ module Trabox
       def self.perform
         config_activate
 
-        require_relative './runner'
+        require_relative './common/runner'
 
         trap('USR1') do
           Rails.logger.level = :debug
