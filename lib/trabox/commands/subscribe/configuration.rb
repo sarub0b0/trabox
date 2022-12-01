@@ -27,10 +27,6 @@ module Trabox
         #   @return [Trabox::Subscriber, Class]
         attr_accessor :subscriber
 
-        def initialize
-          super
-        end
-
         def check
           return if @subscriber.respond_to?(:subscribe)
 
