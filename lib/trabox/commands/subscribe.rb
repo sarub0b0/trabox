@@ -18,6 +18,8 @@ module Trabox
           Rails.logger.level = config.log_level
         end
 
+        ArgumentParser.parse!
+
         config.check
 
         Rails.logger.level = config.log_level
