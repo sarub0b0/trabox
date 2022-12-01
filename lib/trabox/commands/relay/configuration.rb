@@ -22,7 +22,7 @@ module Trabox
         end
       end
 
-      class Configuration < Common::Configuration
+      class Configuration < Command::Configuration
         DEFAULT_SELECT_LIMIT = 3
         DEFAULT_INTERVAL = 5
         DEFAULT_LOCK = true

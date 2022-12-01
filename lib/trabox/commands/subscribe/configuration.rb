@@ -22,7 +22,7 @@ module Trabox
         end
       end
 
-      class Configuration < Common::Configuration
+      class Configuration < Command::Configuration
         # @!attribute [rw] subscriber
         #   @return [Trabox::Subscriber, Class]
         attr_accessor :subscriber
