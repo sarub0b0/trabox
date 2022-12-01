@@ -34,7 +34,7 @@ module Trabox
         # @!attribute [rw] lock
         #   @return [Boolean, String]
         # @!attribute [rw] publisher
-        #   @return [Trabox::Publisher]
+        #   @return [Trabox::Publisher, Class]
         attr_accessor :limit,
                       :interval,
                       :lock,
