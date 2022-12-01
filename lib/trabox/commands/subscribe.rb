@@ -9,7 +9,7 @@ module Trabox
         require_relative './runner'
         require_relative './logger'
 
-        raise unless config.valid?
+        config.check
 
         subscriber = config.subscriber
 

@@ -25,8 +25,10 @@ module Trabox
         #   @return [Option::Relayer]
         attr_accessor :subscriber
 
-        def valid?
-          @subscriber.is_a?(Trabox::Subscriber)
+        def check
+          return if @subscriber.respond_to?(:subscribe)
+
+          raise 'Subscribe Configuration: config.subscriber must be have :subscribe method.'
         end
       end
     end
