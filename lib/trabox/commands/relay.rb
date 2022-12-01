@@ -5,29 +5,37 @@ require_relative './common/runner'
 module Trabox
   module Command
     module Relay
-      def self.perform
-        config_activate
+      class << self
+        def prepare
+          config_activate
 
-        Runner.load_runner
+          Runner.load_runner
 
-        trap('USR1') do
-          Rails.logger.level = :debug
-        end
+          setup_debugging_signal_handler
 
-        trap('USR2') do
+          ArgumentParser.parse!
+
+          config.check
+
           Rails.logger.level = config.log_level
         end
 
-        ArgumentParser.parse!
+        def setup_debugging_signal_handler
+          trap('USR1') do
+            Rails.logger.level = :debug
+          end
 
-        config.check
+          trap('USR2') do
+            Rails.logger.level = config.log_level
+          end
+        end
+      end
 
-        Rails.logger.level = config.log_level
-
-        publisher = config.publisher
+      def self.perform
+        prepare
 
         relayer = Trabox::Relay::Relayer.new(
-          publisher,
+          config.publisher,
           limit: config.limit,
           lock: config.lock
         )
