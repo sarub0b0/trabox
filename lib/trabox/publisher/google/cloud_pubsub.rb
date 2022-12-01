@@ -38,6 +38,11 @@ module Trabox
           def initialize(topic_id, message_ordering: true, ordering_key: nil)
             raise ArgumentError, 'topic_id must be specified.' if topic_id.blank?
 
+            unless ordering_key.nil? || ordering_key.is_a?(OrderingKey)
+              raise ArgumentError,
+                    'ordering_key must be specified OrderingKey class or nil.'
+            end
+
             # @type [Google::Cloud::PubSub::Project]
             @pubsub = ::Google::Cloud::PubSub.new
 
