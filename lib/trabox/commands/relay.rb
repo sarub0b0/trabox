@@ -1,5 +1,6 @@
 require_relative './relay/argument_parser'
 require_relative './relay/configuration'
+require_relative './common/runner'
 
 module Trabox
   module Command
@@ -7,7 +8,7 @@ module Trabox
       def self.perform
         config_activate
 
-        require_relative './common/runner'
+        Runner.load_runner
 
         trap('USR1') do
           Rails.logger.level = :debug

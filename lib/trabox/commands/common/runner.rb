@@ -1,8 +1,18 @@
-rails_root = ENV['RAILS_ROOT'] || '../'
+# frozen_string_literal: true
 
-APP_PATH ||= File.expand_path("#{rails_root}/config/application", __dir__)
-require_relative "#{rails_root}/config/boot"
+module Trabox
+  module Command
+    module Runner
+      RAILS_ROOT = ENV['RAILS_ROOT'] || '../'
+      APP_PATH ||= File.expand_path("#{RAILS_ROOT}/config/application", __dir__)
 
-require APP_PATH
-Rails.application.require_environment!
-Rails.application.load_runner
+      def self.load_runner
+        require_relative "#{RAILS_ROOT}/config/boot"
+
+        require APP_PATH
+        Rails.application.require_environment!
+        Rails.application.load_runner
+      end
+    end
+  end
+end
