@@ -24,7 +24,7 @@ module Trabox
 
       class Configuration < Common::Configuration
         # @!attribute [rw] subscriber
-        #   @return [Option::Relayer]
+        #   @return [Trabox::Subscriber, Class]
         attr_accessor :subscriber
 
         def initialize
