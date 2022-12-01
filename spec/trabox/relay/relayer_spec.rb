@@ -12,13 +12,13 @@ RSpec.describe Trabox::Relay::Relayer do
 
       context 'nilのとき' do
         let(:publisher) { nil }
-        it { expect { subject }.to raise_error(TypeError) }
+        it { expect { subject }.to raise_error(ArgumentError) }
       end
 
       context 'topicが設定されているとき' do
         let(:publisher) do
           publisher = double(Trabox::Publisher::Google::Cloud::PubSub)
-          allow(publisher).to receive(:is_a?).and_return(true)
+          allow(publisher).to receive(:respond_to?).and_return(true)
           publisher
         end
         it { expect { subject }.not_to raise_error }

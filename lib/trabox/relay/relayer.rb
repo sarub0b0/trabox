@@ -5,7 +5,7 @@ module Trabox
       # @param limit [Integer] SELECT文のLIMIT
       # @param lock [Boolean, String] ActiveRecord lock argument
       def initialize(publisher, limit: DEFAULT_SELECT_LIMIT, lock: true)
-        raise TypeError unless publisher.is_a?(Trabox::Publisher)
+        raise ArgumentError unless publisher.respond_to?(:publish)
 
         @publisher = publisher
         @limit = limit
