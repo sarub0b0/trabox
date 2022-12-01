@@ -48,8 +48,10 @@ module Trabox
           @interval = interval.to_i
         end
 
-        def valid?
-          @publisher.is_a?(Trabox::Publisher)
+        def check
+          return if @publisher.respond_to?(:publish)
+
+          raise 'Relay Configuration: config.publisher must be have :publish method.'
         end
       end
     end

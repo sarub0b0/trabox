@@ -12,7 +12,7 @@ module Trabox
 
         ArgumentParser.parse!
 
-        raise unless config.valid?
+        config.check
 
         publisher = config.publisher
 
