@@ -11,23 +11,11 @@ module Trabox
 
           Runner.load_runner
 
-          setup_debugging_signal_handler
-
           ArgumentParser.parse!
 
           config.check
 
           Rails.logger.level = config.log_level
-        end
-
-        def setup_debugging_signal_handler
-          trap('USR1') do
-            Rails.logger.level = :debug
-          end
-
-          trap('USR2') do
-            Rails.logger.level = config.log_level
-          end
         end
       end
 
