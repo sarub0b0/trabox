@@ -1,7 +1,6 @@
-tmp
-Gemfile.lock
+/Gemfile.lock
 bin/trabox*
 
 /**/log/**
-!/**/log/.keep
-
+/**/tmp/**
+!/**/.keep
