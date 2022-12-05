@@ -3,11 +3,11 @@
 module Trabox
   module Command
     module Runner
-      RAILS_ROOT = ENV['RAILS_ROOT'] || '../'
-      APP_PATH ||= File.expand_path("#{RAILS_ROOT}/config/application", __dir__)
+      RAILS_ROOT = ENV['RAILS_ROOT'] || '.'
+      APP_PATH ||= "#{RAILS_ROOT}/config/application"
 
       def self.load_runner
-        require_relative "#{RAILS_ROOT}/config/boot"
+        require "#{RAILS_ROOT}/config/boot"
 
         require APP_PATH
         Rails.application.require_environment!
