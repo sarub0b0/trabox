@@ -7,7 +7,7 @@ module Trabox
       attr_accessor :log_level
 
       def initialize
-        @log_level = ENV['TRABOX_LOG_LEVEL'] || DEFAULT_LOG_LEVEL
+        @log_level = ENV['TRABOX_LOG_LEVEL']&.downcase&.to_sym || DEFAULT_LOG_LEVEL
       end
     end
   end
