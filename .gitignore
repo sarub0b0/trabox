@@ -4,3 +4,5 @@ bin/trabox*
 /**/log/**
 /**/tmp/**
 !/**/.keep
+
+*.gem
