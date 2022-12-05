@@ -33,7 +33,7 @@ module Trabox
                                tags: ["event-type:#{event.class.name.underscore}", "event-id:#{event.id}"])
             end
 
-            Rails.logger.info "Published events. (#{model.name.underscore}=#{unpublished_events.size})"
+            Rails.logger.debug "Published events. (#{model.name.underscore}=#{unpublished_events.size})"
           end
         end
       end

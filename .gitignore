@@ -1,4 +1,7 @@
-spec/rails_app/log
 tmp
 Gemfile.lock
 bin/trabox*
+
+/**/log/**
+!/**/log/.keep
+
