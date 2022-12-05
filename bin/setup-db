@@ -1,9 +1,10 @@
 #!/bin/bash
 
-(
-        cd spec/rails_app/;
-        bin/rails db:drop;
-        bin/rails db:create && bin/rails db:migrate
-)
+set -e
+
+cd spec/rails_app/
+bin/rails db:drop
+bin/rails db:create 
+bin/rails db:migrate
 
 # vim:ft=bash:
