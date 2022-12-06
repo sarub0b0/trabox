@@ -2,7 +2,31 @@
 
 Transactional-Outbox for Rails.
 
+
+**Supported publisher**
+
+- Google Cloud Pub/Sub
+
+
 ## Usage
+
+### Create outbox tables
+
+```bash
+bin/rails g trabox:model <NAME> 
+```
+
+
+### Run
+
+```bash
+bin/trabox relay
+```
+
+```bash
+bin/trabox subscribe
+```
+
 
 How to use my plugin.
 
@@ -17,13 +41,16 @@ gem 'trabox'
 And then execute:
 
 ```bash
-bundle
+bundle install
+bin/rails g trabox:configure
 ```
+This will generate config file `config/initializers/trabox.rb`.
 
-Or install it yourself as:
+
+**Optional**:
 
 ```bash
-gem install trabox
+bundle binstubs trabox
 ```
 
 ## Contributing
