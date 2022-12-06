@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'Transactional-Outbox for Rails'
   spec.description = 'Transactional-Outbox for Rails'
   spec.license     = 'MIT'
+  spec.homepage    = 'https://github.com/sarub0b0/trabox'
 
   spec.bindir = 'exe'
   spec.files = Dir['{lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
