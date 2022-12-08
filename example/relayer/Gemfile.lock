@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    trabox (0.1.0)
+    trabox (0.1.1)
       dogstatsd-ruby
       google-cloud-pubsub
       mysql2
@@ -167,7 +167,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.9-arm64-darwin)
       racc (~> 1.4)
-    optparse (0.2.0)
+    optparse (0.3.0)
     os (1.1.4)
     public_suffix (5.0.0)
     racc (1.6.1)

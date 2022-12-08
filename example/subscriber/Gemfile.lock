@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    trabox (0.1.0)
+    trabox (0.1.1)
       dogstatsd-ruby
       google-cloud-pubsub
       mysql2
