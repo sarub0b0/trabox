@@ -2,44 +2,79 @@
 
 Transactional-Outbox for Rails.
 
+<!-- 書かないといけないこと -->
+<!---->
+<!-- - [x] リポジトリでサポートしているのは Google Cloud Pub/Sub -->
+<!-- - [ ] 自作の Publisher/Subscriber を使用できる -->
+<!--   - [ ] Publisher はイベントモデルを引数にとる publish メソッドをもつインスタンスであること -->
+<!--   - [ ] Subscriber はメッセージをサブスクライブする subscribe メソッドをもつインスタンスであること -->
+<!-- - [ ] Publisher と Subscriber の設定値 -->
+<!-- - [x] インストール手順 -->
+<!-- - [x] 実行方法 -->
+<!-- - [ ] イベントモデルの解説。各フィールドについてなど -->
+<!-- - [x] メトリクス -->
+<!-- - [x] イベントモデルは複数可 -->
 
+## 機能
 
-書かないといけないこと
+- Transactional-Outbox パターンでのイベントデータ公開
+- 複数のデータベース・Outbox テーブルに対応
+- `publish/subscribe`メソッドをもつ自作の publisher/subscriber を使用可能
+- dogstatsd ベースのメトリクス
 
-- リポジトリでサポートしているのはGoogle Cloud Pub/Sub
-- 自作のPublisher/Subscriberを使用できる
-  - Publisherはイベントモデルを引数にとるpublishメソッドをもつインスタンスであること
-  - Subscriberはメッセージをサブスクライブするsubscribeメソッドをもつインスタンスであること
-- PublisherとSubscriberの設定値
-- インストール手順
-- 実行方法
-- イベントモデルの解説。各フィールドについてなど
-- メトリクス
-- イベントモデルは複数可
-
-**サポートしているpublisher**
+**サポートしている publisher**
 
 - Google Cloud Pub/Sub
 
-`Publisher/Subscriber`モジュールをincludeした自作のpublisher/subscriberを使用することもできます。
+## インストール
+
+`Gemfile`に下記を追記
+
+```ruby
+gem 'trabox'
+```
+
+下記コマンドを実行
+
+```bash
+bundle install
+```
+
+**オプション**
+
+```bash
+bundle binstubs trabox
+```
 
 ## 使い方
 
-- configuration
-- create outbox
-- running
+- `initializers`生成
+- outbox テーブル作成
+- relayer/subscriber 起動
 
-### outboxテーブルの作成
+### `initializers`生成
 
-コマンドを実行するoutbox用のモデルに関するファイルが作成されます。  
+```bash
+bundle install
+bin/rails g trabox:configure
+```
+
+設定ファイルが`config/initializers/trabox.rb`に生成されるので、必要に応じて修正してください。
+
+### outbox テーブルの作成
+
+下記コマンドで outbox モデルのファイルが作成されます。  
 `bin/rails g model`のオプションを使えるので、必要に応じて変更してください。
 
 ```bash
-bin/rails g trabox:model <NAME> 
+$ bin/rails g trabox:model --help
+Usage:
+  rails generate trabox:model NAME [field[:type][:index] field[:type][:index]] [options]
+...
 ```
 
-**追加のオプション：**`--polymorphic=<NAME>`オプションをつけると`references`カラムが追加されます。
-
+**追加のオプション：**`--polymorphic=<NAME>`オプションをつけると`references`カラムが追加されます。  
+このオプションはイミュータブルデータモデルに基づいた設計のときにイベントデータと outbox データを関連づけるのに使用します。
 
 例：`bin/rails g trabox:model example --polymorphic=event`
 
@@ -82,37 +117,28 @@ Overwrite configuration
     -l, --limit NUM
     -i, --interval SEC
     -L, --[no-]lock
+        --log-level LEVEL
 
 ```
 
 #### Subscribe
 
 ```bash
-bin/trabox subscribe
+$ bin/trabox subscribe -h
+Usage: trabox subscribe [OPTIONS]
+
+Overwrite configuration
+
+        --log-level LEVEL
 ```
 
-## インストール
+## メトリクス
 
-`Gemfile`に下記を追記
-
-```ruby
-gem 'trabox'
-```
-
-下記コマンドを実行
-
-```bash
-bundle install
-bin/rails g trabox:configure
-```
-
-設定ファイルが`config/initializers/trabox.rb`に生成されるので、必要に応じて修正してください。
-
-**オプション**
-
-```bash
-bundle binstubs trabox
-```
+- unpublished_event_count: パブリッシュするイベント数
+- published_event_count: パブリッシュしたイベント数
+- find_events_error_count: パブリッシュするイベントの取得に失敗した数
+- publish_event_error_count: イベントのパブリッシュに失敗した数
+- update_event_record_error_count: パブリッシュしたイベントのカラム更新に失敗した数
 
 ## Contributing
 
