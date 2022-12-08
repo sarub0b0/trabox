@@ -11,7 +11,7 @@ module Trabox
   # - publish_event_error_count: イベントのパブリッシュに失敗した数
   # - update_event_record_error_count: パブリッシュしたイベントのカラム更新に失敗した数
   module Metric
-    NAMESPACE = ENV.fetch('METRIC_NAMESPACE', 'trabox')
+    NAMESPACE = ENV.fetch('TRABOX_METRIC_NAMESPACE', 'trabox')
     LOG_PREFIX = '[metric]'
     SERVICE_OK = Datadog::Statsd::OK
     SERVICE_CRITICAL = Datadog::Statsd::CRITICAL
