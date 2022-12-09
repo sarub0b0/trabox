@@ -1,6 +1,6 @@
 # Trabox
 
-[日本語](README.ja.md)
+\[[Japanese](README.ja.md)]\[[English](README.md)]
 
 Transactional-Outbox for Rails.
 
@@ -8,25 +8,13 @@ Transactional-Outbox for Rails.
 
 - Google Cloud Pub/Sub
 
-## Usage
+## Features
 
-### Create outbox tables
-
-```bash
-bin/rails g trabox:model <NAME>
-```
-
-### Run
-
-```bash
-bin/trabox relay
-```
-
-```bash
-bin/trabox subscribe
-```
-
-How to use my plugin.
+- Publishing event data in transactional-outbox pattern
+- Polling multiple databases and outbox tables
+- Custom publisher/subscriber
+- Custom Metrics with dogstatsd
+- Ensure message ordering
 
 ## Installation
 
@@ -50,6 +38,48 @@ This will generate config file `config/initializers/trabox.rb`.
 ```bash
 bundle binstubs trabox
 ```
+
+## Usage
+
+### Generate outbox tables
+
+```bash
+# generate model
+bin/rails g trabox:model <NAME>
+
+# Help
+bin/rails g trabox:model --help
+Usage:
+  rails generate trabox:model NAME [field[:type][:index] field[:type][:index]] [options]
+...
+```
+
+### Running relayer
+
+```bash
+bin/trabox relay
+
+# help
+bin/trabox relay -h
+```
+
+### Running subscriber
+
+```bash
+bin/trabox subscribe
+
+# help
+bin/trabox subscribe -h
+```
+
+<!-- ## Architecture -->
+<!---->
+<!-- ![Architecture](docs/images/architecture.jpg) -->
+<!---->
+<!-- ### Sequence diagram -->
+<!---->
+<!-- ![Sequence diagram](docs/images/sequence-diagram.svg) -->
+<!---->
 
 ## Contributing
 

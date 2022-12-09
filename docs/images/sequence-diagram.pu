@@ -1,0 +1,49 @@
+@startuml
+!theme cerulean
+
+
+participant "Relayer side Rails" as RApp order 10
+database "Database\nrelayer side" as RDB order 10
+participant Relayer as Relayer order 20
+queue "Cloud PubSub" as Queue order 30
+participant Subscriber as Subscriber order 40
+database "Database\nsubscriber side" as SDB order 50
+participant "Subscriber side Rails" as SApp order 60
+
+group Transaction
+    RApp -> RDB: Begin Transaction
+    RApp -> RDB: Insert/Update/Delete Data
+    RApp -> RDB: Insert Event
+    RApp -> RDB: Commit
+end
+|||
+group Polling
+|||
+    group Transaction
+        Relayer -> RDB: Begin Transaction
+        Relayer -> RDB: Select events where published_at is null (with lock)
+|||
+        group events.each {}
+            Relayer -> Queue: Publish
+            return Message
+
+            Relayer -> RDB: Update message_id and published_at
+|||
+        end
+
+|||
+        Relayer -> RDB: Commit
+|||
+    end
+
+end
+
+group Listen
+    Subscriber -> Queue: Subscribe
+
+    Subscriber -> SDB: Insert/Update/Delete
+end
+
+SApp -> SDB: Read
+
+@enduml

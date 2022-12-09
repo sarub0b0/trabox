@@ -1,5 +1,7 @@
 # Trabox
 
+\[[Japanese](README.ja.md)]\[[English](README.md)]
+
 Transactional-Outbox for Rails.
 
 <!-- 書かないといけないこと -->
@@ -21,6 +23,7 @@ Transactional-Outbox for Rails.
 - 複数のデータベース・Outbox テーブルに対応
 - `publish/subscribe`メソッドをもつ自作の publisher/subscriber を使用可能
 - dogstatsd ベースのメトリクス
+- 受信するメッセージの順序を維持する
 
 **サポートしている publisher**
 
