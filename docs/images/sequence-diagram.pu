@@ -40,10 +40,11 @@ end
 
 group Listen
     Subscriber -> Queue: Subscribe
+    return Message
 
     Subscriber -> SDB: Insert/Update/Delete
 end
 
-SApp -> SDB: Read
+SApp -> SDB: Read/Write
 
 @enduml
