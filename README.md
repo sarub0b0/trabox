@@ -4,10 +4,6 @@
 
 Transactional-Outbox for Rails.
 
-**Supported publisher**
-
-- Google Cloud Pub/Sub
-
 ## Features
 
 - Publishing event data in transactional-outbox pattern
@@ -15,6 +11,10 @@ Transactional-Outbox for Rails.
 - Custom publisher/subscriber
 - Custom Metrics with dogstatsd
 - Ensure message ordering
+
+**Supported publisher**
+
+- Google Cloud Pub/Sub
 
 ## Installation
 
