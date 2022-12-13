@@ -80,6 +80,15 @@ bin/trabox subscribe -h
 <!---->
 <!-- ![Sequence diagram](docs/images/sequence-diagram.svg) -->
 <!---->
+## Metrics
+
+| name                            | description                                  |
+| ------------------------------- | -------------------------------------------- |
+| unpublished_event_count         | Number of events that will be published      |
+| published_event_count           | Number of published events                   |
+| find_events_error_count         | Number of errors that find events to publish |
+| publish_event_error_count       | Number of publication errors                 |
+| update_event_record_error_count | Number of record update errors               |
 
 ## Contributing
 

@@ -137,11 +137,13 @@ Overwrite configuration
 
 ## メトリクス
 
-- unpublished_event_count: パブリッシュするイベント数
-- published_event_count: パブリッシュしたイベント数
-- find_events_error_count: パブリッシュするイベントの取得に失敗した数
-- publish_event_error_count: イベントのパブリッシュに失敗した数
-- update_event_record_error_count: パブリッシュしたイベントのカラム更新に失敗した数
+| 名前                            | 説明                                             |
+| ------------------------------- | ------------------------------------------------ |
+| unpublished_event_count         | パブリッシュするイベント数                       |
+| published_event_count           | パブリッシュしたイベント数                       |
+| find_events_error_count         | パブリッシュするイベントの取得に失敗した数       |
+| publish_event_error_count       | イベントのパブリッシュに失敗した数               |
+| update_event_record_error_count | パブリッシュしたイベントのカラム更新に失敗した数 |
 
 ## Contributing
 
