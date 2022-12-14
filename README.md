@@ -8,7 +8,7 @@ Transactional-Outbox for Rails.
 
 - Publishing event data in transactional-outbox pattern
 - Polling multiple databases and outbox tables
-- Custom publisher/subscriber
+- Can use your own publisher/subscriber
 - Custom Metrics with dogstatsd
 - Ensure message ordering
 
