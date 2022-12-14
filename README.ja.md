@@ -4,19 +4,6 @@
 
 Transactional-Outbox for Rails.
 
-<!-- 書かないといけないこと -->
-<!---->
-<!-- - [x] リポジトリでサポートしているのは Google Cloud Pub/Sub -->
-<!-- - [ ] 自作の Publisher/Subscriber を使用できる -->
-<!--   - [ ] Publisher はイベントモデルを引数にとる publish メソッドをもつインスタンスであること -->
-<!--   - [ ] Subscriber はメッセージをサブスクライブする subscribe メソッドをもつインスタンスであること -->
-<!-- - [ ] Publisher と Subscriber の設定値 -->
-<!-- - [x] インストール手順 -->
-<!-- - [x] 実行方法 -->
-<!-- - [ ] イベントモデルの解説。各フィールドについてなど -->
-<!-- - [x] メトリクス -->
-<!-- - [x] イベントモデルは複数可 -->
-
 ## 機能
 
 - Transactional-Outbox パターンでのイベントデータ公開
@@ -41,7 +28,10 @@ gem 'trabox'
 
 ```bash
 bundle install
+bin/rails g trabox:configure
 ```
+
+これで、`config/initializers/trabox.rb`ファイルが生成されます。
 
 **オプション**
 
@@ -51,32 +41,23 @@ bundle binstubs trabox
 
 ## 使い方
 
-- `initializers`生成
-- outbox テーブル作成
-- relayer/subscriber 起動
-
-### `initializers`生成
-
-```bash
-bundle install
-bin/rails g trabox:configure
-```
-
-設定ファイルが`config/initializers/trabox.rb`に生成されるので、必要に応じて修正してください。
-
 ### outbox テーブルの作成
 
 下記コマンドで outbox モデルのファイルが作成されます。  
 `bin/rails g model`のオプションを使えるので、必要に応じて変更してください。
 
 ```bash
+# generate model
+bin/rails g trabox:model <NAME>
+
+# Help
 $ bin/rails g trabox:model --help
 Usage:
   rails generate trabox:model NAME [field[:type][:index] field[:type][:index]] [options]
 ...
 ```
 
-**追加のオプション：**`--polymorphic=<NAME>`オプションをつけると`references`カラムが追加されます。  
+**追加のオプション: --polymorphic=\<NAME>** オプションをつけると`references`カラムが追加されます。  
 このオプションはイミュータブルデータモデルに基づいた設計のときにイベントデータと outbox データを関連づけるのに使用します。
 
 例：`bin/rails g trabox:model example --polymorphic=event`
@@ -96,23 +77,13 @@ class CreateExamples < ActiveRecord::Migration[6.1]
 end
 ```
 
-### 実行
+### Relayer 実行
 
 ```bash
-$ bin/trabox -h
-Usage: trabox <COMMAND> [OPTIONS]
-    -h, --help           Print help information
-    -v, --version        Print version information
+bin/trabox relay
 
-Commands:
-    r, relay            Relay events
-    s, subscribe        Subscribe events
-```
-
-#### Relay
-
-```bash
-$ bin/trabox relay -h
+# Help
+bin/trabox relay -h
 Usage: trabox relay [OPTIONS]
 
 Overwrite configuration
@@ -124,10 +95,13 @@ Overwrite configuration
 
 ```
 
-#### Subscribe
+#### Subscriber 実行
 
 ```bash
-$ bin/trabox subscribe -h
+bin/trabox subscribe
+
+# Help
+ bin/trabox subscribe -h
 Usage: trabox subscribe [OPTIONS]
 
 Overwrite configuration

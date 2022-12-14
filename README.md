@@ -54,13 +54,44 @@ Usage:
 ...
 ```
 
+**additional option: --polymorphic=\<NAME>**
+This option is inserted references column in generated outbox model.
+This use to associate event record with outbox record when the application is designed immutable data model.
+
+example:`bin/rails g trabox:model example --polymorphic=event`
+
+```ruby
+class CreateExamples < ActiveRecord::Migration[6.1]
+  def change
+    create_table :examples do |t|
+      t.references :event, polymorphic: true, null: false # additional column
+      t.binary :event_data
+      t.string :message_id
+      t.datetime :published_at
+
+      t.timestamps
+    end
+  end
+end
+```
+
 ### Running relayer
 
 ```bash
 bin/trabox relay
 
-# help
+# Help
 bin/trabox relay -h
+Usage: trabox relay [OPTIONS]
+
+Overwrite configuration
+
+    -l, --limit NUM
+    -i, --interval SEC
+    -L, --[no-]lock
+        --log-level LEVEL
+
+
 ```
 
 ### Running subscriber
@@ -68,8 +99,13 @@ bin/trabox relay -h
 ```bash
 bin/trabox subscribe
 
-# help
+# Help
 bin/trabox subscribe -h
+Usage: trabox subscribe [OPTIONS]
+
+Overwrite configuration
+
+        --log-level LEVEL
 ```
 
 <!-- ## Architecture -->
