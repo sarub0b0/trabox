@@ -108,14 +108,6 @@ Overwrite configuration
         --log-level LEVEL
 ```
 
-<!-- ## Architecture -->
-<!---->
-<!-- ![Architecture](docs/images/architecture.jpg) -->
-<!---->
-<!-- ### Sequence diagram -->
-<!---->
-<!-- ![Sequence diagram](docs/images/sequence-diagram.svg) -->
-<!---->
 ## Metrics
 
 | name                            | description                                  |
@@ -128,7 +120,7 @@ Overwrite configuration
 
 ## Contributing
 
-Contribution directions go here.
+Bug reports and pull requests are welcome.
 
 ## License
 

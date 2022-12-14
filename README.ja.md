@@ -121,7 +121,7 @@ Overwrite configuration
 
 ## Contributing
 
-Contribution directions go here.
+Bug reports and pull requests are welcome.
 
 ## License
 
