@@ -22,7 +22,7 @@ Trabox::Command::Subscribe.configure do |config|
   config.subscriber = Trabox::Subscriber::Google::Cloud::PubSub.new(
     'trabox-sub',
     listen_options: {},
-    before_listen_acknowledge_callbacks:,
+    before_listen_acknowledge_callbacks: before_listen_acknowledge_callbacks,
     after_listen_acknowledge_callbacks: [],
     error_listen_callbacks: []
   )

@@ -76,6 +76,7 @@ GEM
     byebug (11.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    date (3.3.1)
     dogstatsd-ruby (5.5.0)
     erubi (1.11.0)
     faraday (2.7.1)
@@ -85,7 +86,7 @@ GEM
     faraday-retry (2.0.0)
       faraday (~> 2.0)
     ffi (1.15.5)
-    gapic-common (0.15.1)
+    gapic-common (0.16.0)
       faraday (>= 1.9, < 3.a)
       faraday-retry (>= 1.0, < 3.a)
       google-protobuf (~> 3.14)
@@ -114,8 +115,8 @@ GEM
       gapic-common (>= 0.10, < 2.a)
       google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.1)
-    google-protobuf (3.21.11-x86_64-linux)
-    googleapis-common-protos (1.3.12)
+    google-protobuf (3.21.11)
+    googleapis-common-protos (1.4.0)
       google-protobuf (~> 3.14)
       googleapis-common-protos-types (~> 1.2)
       grpc (~> 1.27)
@@ -128,7 +129,7 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
-    grpc (1.50.0-x86_64-linux)
+    grpc (1.50.0)
       google-protobuf (~> 3.21)
       googleapis-common-protos-types (~> 1.0)
     grpc-google-iam-v1 (1.2.0)
@@ -141,7 +142,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.19.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.0)
@@ -156,7 +157,8 @@ GEM
     minitest (5.16.3)
     multi_json (1.15.0)
     mysql2 (0.5.4)
-    net-imap (0.3.1)
+    net-imap (0.3.2)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
@@ -165,7 +167,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.13.10-arm64-darwin)
       racc (~> 1.4)
     optparse (0.3.0)
     os (1.1.4)
@@ -192,8 +194,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.3)
-      loofah (~> 2.3)
+    rails-html-sanitizer (1.4.4)
+      loofah (~> 2.19, >= 2.19.1)
     railties (6.1.7)
       actionpack (= 6.1.7)
       activesupport (= 6.1.7)
@@ -229,7 +231,7 @@ GEM
     zeitwerk (2.6.6)
 
 PLATFORMS
-  x86_64-linux
+  arm64-darwin-21
 
 DEPENDENCIES
   byebug
