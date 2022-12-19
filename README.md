@@ -4,6 +4,8 @@
 
 Transactional-Outbox for Rails.
 
+![](./docs/images/architecture.jpg)
+
 ## Features
 
 - Publishing event data in transactional-outbox pattern
