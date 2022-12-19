@@ -60,12 +60,12 @@ Usage:
 This option is inserted references column in generated outbox model.
 This use to associate event record with outbox record when the application is designed immutable data model.
 
-example:`bin/rails g trabox:model example --polymorphic=event`
+example:`bin/rails g trabox:model event --polymorphic=event`
 
 ```ruby
-class CreateExamples < ActiveRecord::Migration[6.1]
+class CreateEvents < ActiveRecord::Migration[6.1]
   def change
-    create_table :examples do |t|
+    create_table :events do |t|
       t.references :event, polymorphic: true, null: false # additional column
       t.binary :event_data
       t.string :message_id

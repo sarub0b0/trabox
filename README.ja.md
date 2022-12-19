@@ -62,12 +62,12 @@ Usage:
 **追加のオプション: --polymorphic=\<NAME>** オプションをつけると`references`カラムが追加されます。  
 このオプションはイミュータブルデータモデルに基づいた設計のときにイベントデータと outbox データを関連づけるのに使用します。
 
-例：`bin/rails g trabox:model example --polymorphic=event`
+例：`bin/rails g trabox:model event --polymorphic=event`
 
 ```ruby
-class CreateExamples < ActiveRecord::Migration[6.1]
+class CreateEvents < ActiveRecord::Migration[6.1]
   def change
-    create_table :examples do |t|
+    create_table :events do |t|
       t.references :event, polymorphic: true, null: false # --polymorphicオプションで生成されたカラム
       t.binary :event_data
       t.string :message_id
