@@ -120,6 +120,10 @@ Overwrite configuration
 | publish_event_error_count       | Number of publication errors                 |
 | update_event_record_error_count | Number of record update errors               |
 
+## Sequence diagram
+
+![](./docs/images/sequence-diagram.svg)
+
 ## Contributing
 
 Bug reports and pull requests are welcome.

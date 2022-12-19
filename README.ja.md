@@ -121,6 +121,10 @@ Overwrite configuration
 | publish_event_error_count       | イベントのパブリッシュに失敗した数               |
 | update_event_record_error_count | パブリッシュしたイベントのカラム更新に失敗した数 |
 
+## Sequence diagram
+
+![](./docs/images/sequence-diagram.svg)
+
 ## Contributing
 
 Bug reports and pull requests are welcome.

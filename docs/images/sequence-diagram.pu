@@ -21,7 +21,7 @@ group Polling
 |||
     group Transaction
         Relayer -> RDB: Begin Transaction
-        Relayer -> RDB: Select events where published_at is null (with lock)
+        Relayer -> RDB: Select events where published_at is null
 |||
         group events.each {}
             Relayer -> Queue: Publish
