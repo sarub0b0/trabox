@@ -79,6 +79,19 @@ class CreateEvents < ActiveRecord::Migration[6.1]
 end
 ```
 
+### Event データの登録
+
+Publish するイベントデータを作成した outbox テーブルに登録します。
+
+```ruby
+# Your rails application
+ActiveRecord::Base.transaction do
+  user = User.create! name: 'hoge'
+
+  Event.create! event_data: <serialized_user_event>
+end
+```
+
 ### Relayer 実行
 
 ```bash

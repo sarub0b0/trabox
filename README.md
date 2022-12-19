@@ -77,6 +77,19 @@ class CreateEvents < ActiveRecord::Migration[6.1]
 end
 ```
 
+### Registering event data
+
+Insert events to publish into the generated outbox table as part of the local transaction.
+
+```ruby
+# Your rails application
+ActiveRecord::Base.transaction do
+  user = User.create! name: 'hoge'
+
+  Event.create! event_data: <serialized_user_event>
+end
+```
+
 ### Running relayer
 
 ```bash
