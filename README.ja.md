@@ -152,6 +152,39 @@ Overwrite configuration
 
 Bug reports and pull requests are welcome.
 
+## Development
+
+### Install gems
+
+```bash
+bundle install
+```
+
+### start mysql / pubsub emulator
+
+```bash
+docker-compose up
+```
+
+**db migrate**
+
+```bash
+cd spec/rails_app
+bin/rails db:migrate
+```
+
+**create topic / subscribe**
+
+```bash
+rake trabox:pubsub_setup
+```
+
+### Test
+
+```bash
+bin/rspec
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
