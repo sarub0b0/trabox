@@ -125,6 +125,9 @@ Overwrite configuration
 
 ## Metrics
 
+The default namespace of metrics is `trabox`.  
+The namespace can be changed with `TRABOX_METRIC_NAMESPACE` environment variable.
+
 | name                            | description                                  |
 | ------------------------------- | -------------------------------------------- |
 | unpublished_event_count         | Number of events that will be published      |
@@ -132,6 +135,13 @@ Overwrite configuration
 | find_events_error_count         | Number of errors that find events to publish |
 | publish_event_error_count       | Number of publication errors                 |
 | update_event_record_error_count | Number of record update errors               |
+
+### Health check
+
+| command   | metric name             |
+| --------- | ----------------------- |
+| relay     | relay.service.check     |
+| subscribe | subscribe.service.check |
 
 ## Sequence diagram
 

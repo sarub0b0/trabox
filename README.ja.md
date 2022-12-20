@@ -126,6 +126,9 @@ Overwrite configuration
 
 ## メトリクス
 
+メトリクスの名前空間の初期値は`trabox`です。  
+名前空間は`TRABOX_METRIC_NAMESPACE`環境変数で変更可能です。
+
 | 名前                            | 説明                                             |
 | ------------------------------- | ------------------------------------------------ |
 | unpublished_event_count         | パブリッシュするイベント数                       |
@@ -133,6 +136,13 @@ Overwrite configuration
 | find_events_error_count         | パブリッシュするイベントの取得に失敗した数       |
 | publish_event_error_count       | イベントのパブリッシュに失敗した数               |
 | update_event_record_error_count | パブリッシュしたイベントのカラム更新に失敗した数 |
+
+### Health check
+
+| command   | metric name             |
+| --------- | ----------------------- |
+| relay     | relay.service.check     |
+| subscribe | subscribe.service.check |
 
 ## Sequence diagram
 
