@@ -165,11 +165,11 @@ bundle install
 docker-compose up
 ```
 
-**db migrate**
+**setup db**
 
 ```bash
 cd spec/rails_app
-bin/rails db:migrate
+bin/rails db:setup
 ```
 
 **create topic / subscribe**
