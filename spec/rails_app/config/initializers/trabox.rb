@@ -1,7 +1,7 @@
-ENV['PUBSUB_TOPIC_ID'] = 'trabox'
-ENV['PUBSUB_SUBSCRIPTION_ID'] = 'trabox-sub'
-ENV['PUBSUB_EMULATOR_HOST'] = 'localhost:8085'
-ENV['GOOGLE_CLOUD_PROJECT'] = 'trabox'
+ENV['PUBSUB_TOPIC_ID'] ||= 'trabox'
+ENV['PUBSUB_SUBSCRIPTION_ID'] ||= 'trabox-sub'
+ENV['PUBSUB_EMULATOR_HOST'] ||= 'localhost:8085'
+ENV['GOOGLE_CLOUD_PROJECT'] ||= 'trabox'
 
 Trabox::Metric.setup unless Rails.env.test?
 
