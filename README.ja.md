@@ -160,7 +160,7 @@ Bug reports and pull requests are welcome.
 bundle install
 ```
 
-### start mysql / pubsub emulator
+### Start mysql / pubsub emulator
 
 ```bash
 docker-compose up
