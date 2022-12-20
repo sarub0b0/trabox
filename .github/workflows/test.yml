@@ -42,7 +42,7 @@ jobs:
       - name: Set up database
         run: |
           cd spec/rails_app
-          bin/rails db:migrate
+          bin/rails db:setup
 
       - name: Run tests
         run: |
