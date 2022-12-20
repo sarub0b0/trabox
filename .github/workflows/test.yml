@@ -40,7 +40,9 @@ jobs:
           bundler-cache: true
 
       - name: Set up database
-        run: bin/setup-db
+        run: |
+          cd spec/rails_app
+          bin/rails db:migrate
 
       - name: Run tests
         run: |
