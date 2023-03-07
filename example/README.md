@@ -22,7 +22,7 @@ docker run --rm -p 8085:8085 google/cloud-sdk gcloud beta emulators pubsub start
 
 ```bash
 $ cd relayer
-$ in/trabox relay
+$ bin/trabox relay
 # stdout
 I, [2022-12-14T16:16:35.989306 #26802]  INFO -- : Published events. (event=0)
 I, [2022-12-14T16:16:41.021746 #26802]  INFO -- : Published events. (event=0)
