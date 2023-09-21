@@ -123,9 +123,9 @@ GEM
       google-protobuf (~> 3.14)
       googleapis-common-protos-types (~> 1.2)
       grpc (~> 1.27)
-    googleapis-common-protos-types (1.8.0)
+    googleapis-common-protos-types (1.9.0)
       google-protobuf (~> 3.18)
-    googleauth (1.8.0)
+    googleauth (1.8.1)
       faraday (>= 0.17.3, < 3.a)
       jwt (>= 1.4, < 3.0)
       multi_json (~> 1.11)
@@ -168,7 +168,7 @@ GEM
       net-protocol
     net-protocol (0.2.1)
       timeout
-    net-smtp (0.3.3)
+    net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
     nokogiri (1.15.4-arm64-darwin)
