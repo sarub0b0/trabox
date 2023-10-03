@@ -19,4 +19,4 @@ gem 'rspec-rails', '~> 6.0'
 
 # dev tools
 gem 'rubocop', '~> 1.38'
-gem 'ruby-lsp', '~> 0.10.0'
+gem 'ruby-lsp', '~> 0.11.0'
