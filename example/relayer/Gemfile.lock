@@ -87,7 +87,7 @@ GEM
     faraday-net_http (3.0.2)
     faraday-retry (2.2.0)
       faraday (~> 2.0)
-    ffi (1.16.2)
+    ffi (1.16.3)
     gapic-common (0.20.0)
       faraday (>= 1.9, < 3.a)
       faraday-retry (>= 1.0, < 3.a)
@@ -117,8 +117,8 @@ GEM
       gapic-common (>= 0.20.0, < 2.a)
       google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.1)
-    google-protobuf (3.24.3-arm64-darwin)
-    google-protobuf (3.24.3-x86_64-linux)
+    google-protobuf (3.24.4-arm64-darwin)
+    google-protobuf (3.24.4-x86_64-linux)
     googleapis-common-protos (1.4.0)
       google-protobuf (~> 3.14)
       googleapis-common-protos-types (~> 1.2)
@@ -161,7 +161,7 @@ GEM
     minitest (5.20.0)
     multi_json (1.15.0)
     mysql2 (0.5.5)
-    net-imap (0.3.7)
+    net-imap (0.4.0)
       date
       net-protocol
     net-pop (0.1.2)
