@@ -109,7 +109,7 @@ GEM
       google-cloud-core (~> 1.5)
       google-cloud-pubsub-v1 (~> 0.8)
       retriable (~> 3.1)
-    google-cloud-pubsub-v1 (0.18.0)
+    google-cloud-pubsub-v1 (0.18.1)
       gapic-common (>= 0.20.0, < 2.a)
       google-cloud-errors (~> 1.0)
       google-iam-v1 (>= 0.4, < 2.a)
@@ -161,7 +161,7 @@ GEM
     minitest (5.20.0)
     multi_json (1.15.0)
     mysql2 (0.5.5)
-    net-imap (0.4.1)
+    net-imap (0.4.2)
       date
       net-protocol
     net-pop (0.1.2)
