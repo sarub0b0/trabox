@@ -159,7 +159,7 @@ GEM
     marcel (1.0.4)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.22.2)
+    minitest (5.22.3)
     multi_json (1.15.0)
     mysql2 (0.5.6)
     net-http (0.4.1)
