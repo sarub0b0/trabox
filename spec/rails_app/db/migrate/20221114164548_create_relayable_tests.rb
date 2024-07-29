@@ -1,4 +1,4 @@
-class CreateRelayableTests < ActiveRecord::Migration[6.1]
+class CreateRelayableTests < ActiveRecord::Migration[6.0]
   def change
     create_table :relayable_tests do |t|
       t.binary :event_data
