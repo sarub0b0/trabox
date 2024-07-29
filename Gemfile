@@ -14,22 +14,18 @@ gem 'ammeter', '~> 1.1'
 
 gem 'byebug'
 gem 'database_cleaner-active_record', '~> 2.0'
-
-if RUBY_VERSION >= '2.7.0'
-  gem 'factory_bot', '>= 6.2.0'
-else
-  gem 'factory_bot', '~> 6.2.0'
-end
-
-gem 'rspec-rails', '>= 5.0.0'
+gem 'factory_bot'
+gem 'rspec-rails'
 
 # dev tools
 
-gem 'pry-byebug', '~> 3.10' if RUBY_VERSION >= '2.7.0'
-gem 'rubocop', '~> 1.38'
-gem 'ruby-lsp', '~> 0.17.0' if RUBY_VERSION >= '3.0.0'
+gem 'pry-byebug'
+gem 'rubocop'
+gem 'ruby-lsp'
 
-if RUBY_VERSION >= '2.7.0'
+if RUBY_VERSION >= '3.0.0'
+  gem 'google-protobuf'
+elsif RUBY_VERSION >= '2.7.0'
   gem 'google-protobuf', '~> 3.24.0'
 else
   gem 'google-protobuf', '< 3.24.0'
