@@ -4,4 +4,6 @@ Dockerfile
 README.md
 .gitignore
 .git
+Gemfile.lock
+gemfiles/*.lock
 

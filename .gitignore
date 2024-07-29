@@ -6,3 +6,5 @@ bin/trabox*
 !/**/.keep
 
 *.gem
+
+gemfiles/*.lock
