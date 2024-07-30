@@ -1,9 +1,12 @@
 name: test
 on:
   push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -76,3 +79,17 @@ jobs:
           gcloud beta emulators pubsub start --host-port=localhost:8085 --quiet &
           curl http://localhost:8085 --silent --retry 30 --retry-delay 1 --retry-connrefused
           bin/rspec
+
+  conclusion:
+    needs: tests
+    if: always() && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check tests result
+        run: |
+          if [[ ${{ needs.tests.result }} == 'success' ]]; then
+            echo "All tests passed!"
+          else
+            echo "Some tests failed!"
+            exit 1
+          fi
