@@ -18,6 +18,11 @@ Transactional-Outbox for Rails.
 
 - Google Cloud Pub/Sub
 
+## Requirements
+
+- Ruby 2.6+
+- Rails 6.0+
+
 ## Installation
 
 Add this line to your application's Gemfile:

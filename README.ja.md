@@ -18,6 +18,11 @@ Transactional-Outbox for Rails.
 
 - Google Cloud Pub/Sub
 
+## 必要条件
+
+- Ruby 2.6+
+- Rails 6.0+
+
 ## インストール
 
 `Gemfile`に下記を追記
