@@ -1,4 +1,4 @@
-class CreateRelayerTests < ActiveRecord::Migration[6.1]
+class CreateRelayerTests < ActiveRecord::Migration[6.0]
   def change
     create_table :relayer_tests do |t|
       t.binary :event_data

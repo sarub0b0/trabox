@@ -22,5 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'google-cloud-pubsub', '~> 2.13'
   spec.add_dependency 'mysql2', '~> 0.5', '>= 0.5.4'
   spec.add_dependency 'optparse', '~> 0.2', '>= 0.2.0'
-  spec.add_dependency 'rails', '~> 6.0', '>= 6.0.0'
+  spec.add_dependency 'rails', '>= 6.0.0'
+
+  spec.add_development_dependency 'appraisal', '~> 2.5'
 end
