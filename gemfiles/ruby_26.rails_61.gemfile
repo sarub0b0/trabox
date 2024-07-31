@@ -12,7 +12,7 @@ gem "rspec-rails", "~> 5.0"
 gem "pry-byebug"
 gem "rubocop"
 gem "ruby-lsp"
-gem "google-protobuf", "< 3.24.0"
 gem "rails", "~> 6.1.0"
+gem "google-protobuf", "< 3.24.0"
 
 gemspec path: "../"

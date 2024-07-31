@@ -22,11 +22,3 @@ gem 'rspec-rails'
 gem 'pry-byebug'
 gem 'rubocop'
 gem 'ruby-lsp'
-
-if RUBY_VERSION >= '3.0.0'
-  gem 'google-protobuf'
-elsif RUBY_VERSION >= '2.7.0'
-  gem 'google-protobuf', '~> 3.25.0'
-else
-  gem 'google-protobuf', '< 3.25.5'
-end
