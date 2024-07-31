@@ -80,4 +80,16 @@ appraise 'ruby-31.rails-71' do
   gem 'rails', '~> 7.1.0'
 end
 
+# ruby 3.2
+appraise 'ruby-32.rails-71' do
+  ruby '~> 3.2.0'
+  gem 'rails', '~> 7.1.0'
+end
+
+# ruby 3.3
+appraise 'ruby-33.rails-71' do
+  ruby '~> 3.3.0'
+  gem 'rails', '~> 7.1.0'
+end
+
 # vim:ft=ruby:
