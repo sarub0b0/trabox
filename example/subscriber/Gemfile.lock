@@ -81,8 +81,9 @@ GEM
     date (3.3.4)
     dogstatsd-ruby (5.6.1)
     erubi (1.13.0)
-    faraday (2.11.0)
+    faraday (2.12.0)
       faraday-net_http (>= 2.0, < 3.4)
+      json
       logger
     faraday-net_http (3.3.0)
       net-http
@@ -112,28 +113,28 @@ GEM
       google-cloud-core (~> 1.5)
       google-cloud-pubsub-v1 (>= 0.20, < 2.a)
       retriable (~> 3.1)
-    google-cloud-pubsub-v1 (1.1.0)
+    google-cloud-pubsub-v1 (1.1.2)
       gapic-common (>= 0.21.1, < 2.a)
       google-cloud-errors (~> 1.0)
       google-iam-v1 (>= 0.7, < 2.a)
-    google-iam-v1 (1.0.0)
+    google-iam-v1 (1.0.1)
       gapic-common (>= 0.21.1, < 2.a)
       google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.1)
-    google-protobuf (4.28.0-aarch64-linux)
+    google-protobuf (4.28.2-aarch64-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.28.0-arm64-darwin)
+    google-protobuf (4.28.2-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.28.0-x86_64-linux)
+    google-protobuf (4.28.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
     googleapis-common-protos (1.6.0)
       google-protobuf (>= 3.18, < 5.a)
       googleapis-common-protos-types (~> 1.7)
       grpc (~> 1.41)
-    googleapis-common-protos-types (1.15.0)
+    googleapis-common-protos-types (1.16.0)
       google-protobuf (>= 3.18, < 5.a)
     googleauth (1.11.0)
       faraday (>= 1.0, < 3.a)
@@ -155,14 +156,15 @@ GEM
       google-protobuf (>= 3.18, < 5.a)
       googleapis-common-protos (~> 1.4)
       grpc (~> 1.41)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    jwt (2.8.2)
+    json (2.7.2)
+    jwt (2.9.0)
       base64
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.0)
+    logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -179,7 +181,7 @@ GEM
     mysql2 (0.5.6)
     net-http (0.4.1)
       uri
-    net-imap (0.4.15)
+    net-imap (0.4.16)
       date
       net-protocol
     net-pop (0.1.2)
@@ -256,7 +258,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.17)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   aarch64-linux
