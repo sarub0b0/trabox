@@ -15,10 +15,13 @@ gem 'ammeter', '~> 1.1'
 gem 'byebug'
 gem 'database_cleaner-active_record', '~> 2.0'
 gem 'factory_bot'
-gem 'rspec-rails'
+gem "rspec-rails", "~> 7.1"
 
 # dev tools
 
 gem 'pry-byebug'
 gem 'rubocop'
 gem 'ruby-lsp'
+
+gem 'rails', '~> 7.1.0'
+gem "mysql2", "~> 0.5.6"
