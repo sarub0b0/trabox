@@ -79,8 +79,8 @@ GEM
     concurrent-ruby (1.3.4)
     crass (1.0.6)
     date (3.4.1)
-    dogstatsd-ruby (5.6.3)
-    erubi (1.13.0)
+    dogstatsd-ruby (5.6.4)
+    erubi (1.13.1)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -124,13 +124,13 @@ GEM
       google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.1)
     google-logging-utils (0.1.0)
-    google-protobuf (4.29.1-aarch64-linux)
+    google-protobuf (4.29.2-aarch64-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.1-arm64-darwin)
+    google-protobuf (4.29.2-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.1-x86_64-linux)
+    google-protobuf (4.29.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
     googleapis-common-protos (1.6.0)
@@ -139,7 +139,7 @@ GEM
       grpc (~> 1.41)
     googleapis-common-protos-types (1.16.0)
       google-protobuf (>= 3.18, < 5.a)
-    googleauth (1.12.0)
+    googleauth (1.12.1)
       faraday (>= 1.0, < 3.a)
       google-cloud-env (~> 2.2)
       google-logging-utils (~> 0.1)
@@ -162,13 +162,13 @@ GEM
       grpc (~> 1.41)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    json (2.9.0)
+    json (2.9.1)
     jwt (2.9.3)
       base64
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.2)
+    logger (1.6.4)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -185,7 +185,7 @@ GEM
     mysql2 (0.5.6)
     net-http (0.6.0)
       uri
-    net-imap (0.5.1)
+    net-imap (0.5.2)
       date
       net-protocol
     net-pop (0.1.2)
@@ -255,7 +255,7 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     thor (1.3.2)
-    timeout (0.4.2)
+    timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (1.0.2)
