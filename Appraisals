@@ -26,7 +26,7 @@ end
 
 appraise 'ruby-27.rails-61' do
   ruby '~> 2.7.0'
-  gem 'rails', '~> 6.0.0'
+  gem 'rails', '~> 6.1.0'
   gem 'factory_bot', '~> 6.2.0'
   gem 'google-cloud-pubsub', '~> 2.13.0'
   gem 'google-protobuf', '~> 3.24.0'
@@ -51,7 +51,7 @@ end
 # ruby 3.0
 appraise 'ruby-30.rails-61' do
   ruby '~> 3.0.0'
-  gem 'rails', '~> 6.0.0'
+  gem 'rails', '~> 6.1.0'
 end
 
 appraise 'ruby-30.rails-70' do
