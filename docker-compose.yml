@@ -20,7 +20,7 @@ services:
     tty: true
     stdin_open: true
   mysql:
-    image: mysql:9.1
+    image: mysql:9.2
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
