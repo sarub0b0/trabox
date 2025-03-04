@@ -5,8 +5,7 @@ set -e
 (
     cd ./relayer;
     bin/rails db:drop;
-    bin/rails db:create
-    bin/rails db:migrate
+    bin/rails db:prepare
 
     rake pubsub:setup
 )
@@ -14,6 +13,5 @@ set -e
 (
     cd ./subscriber
     bin/rails db:drop
-    bin/rails db:create
-    bin/rails db:migrate
+    bin/rails db:prepare
 )
