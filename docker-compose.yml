@@ -1,8 +1,10 @@
-version: "3"
 services:
   trabox:
     container_name: trabox
-    build: ./
+    build:
+      context: ./
+      args:
+        RUBY_VERSION: "3.4"
     command: sleep 99999999999999
     volumes:
       - ./:/app
