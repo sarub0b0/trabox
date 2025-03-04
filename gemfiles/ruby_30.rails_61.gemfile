@@ -12,6 +12,6 @@ gem "rspec-rails"
 gem "pry-byebug"
 gem "rubocop"
 gem "ruby-lsp"
-gem "rails", "~> 6.0.0"
+gem "rails", "~> 6.1.0"
 
 gemspec path: "../"
