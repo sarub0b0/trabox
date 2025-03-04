@@ -13,5 +13,6 @@ gem "pry-byebug"
 gem "rubocop"
 gem "ruby-lsp"
 gem "rails", "~> 6.1.0"
+gem "concurrent-ruby", "1.3.4"
 
 gemspec path: "../"
