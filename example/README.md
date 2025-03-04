@@ -56,7 +56,7 @@ irb(main):002:0>
 
 ```bash
 $ cd subscriber
-$ bin/trabox subscriber
+$ bin/trabox subscribe
 # stdout
 I, [2022-12-14T16:16:15.538208 #26977]  INFO -- : Subscription 'trabox-sub': message ordering is true.
 I, [2022-12-14T16:16:15.831054 #26977]  INFO -- : Listening subscrition...
