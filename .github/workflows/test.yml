@@ -41,7 +41,7 @@ jobs:
             gemfile: ruby_33.rails_71.gemfile
     services:
       mysql:
-        image: mysql:9.1
+        image: mysql:9.2
         ports:
           - "3306:3306"
         env:
