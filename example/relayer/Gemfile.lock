@@ -312,7 +312,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux
