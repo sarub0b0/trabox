@@ -38,7 +38,7 @@ module Trabox
           rescue StandardError => e
             Rails.logger.error e
 
-            ActiveRecord::Base.clear_all_connections!
+            ActiveRecord::Base.connection_handler.clear_all_connections!(:all)
 
             Metric.service_check('relay.service.check', Metric::SERVICE_CRITICAL)
           end

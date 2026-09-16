@@ -20,8 +20,8 @@ Transactional-Outbox for Rails.
 
 ## Requirements
 
-- Ruby 2.6+
-- Rails 6.0+
+- Ruby 3.2+
+- Rails 7.2+
 
 ## Installation
 
