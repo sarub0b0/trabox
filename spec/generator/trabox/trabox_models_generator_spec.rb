@@ -36,7 +36,9 @@ RSpec.describe Trabox::ModelGenerator, type: :generator do
     end
 
     describe 'migrate' do
-      subject { migration_file('db/migrate/create_events.rb') }
+      # ammeterのmigration_fileはStringを返し、existマッチャがRails 8で削除された
+      # ActiveSupport::Deprecation.warnを呼ぶため、Pathnameに変換して組み込みマッチャを使う
+      subject { Pathname.new(migration_file('db/migrate/create_events.rb')) }
 
       context '--polymorphicが設定されているとき' do
         before do
